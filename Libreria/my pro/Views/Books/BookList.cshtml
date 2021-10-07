@@ -1,0 +1,200 @@
+﻿@using my_pro.Models
+@using my_pro.Models.BussinessTypes
+@model IEnumerable<BookModel>
+
+<div class="book-list">
+    @foreach (BookModel book in Model)
+    {
+        <section class="col-md-4">
+            <article class="hr-card card ">
+                <div class="row hr-content">
+                        <!--Card content-->
+                        <div class="col-md-4 img-col" style="height:100px">
+
+
+                            <a href="/Books/Detail/@book.book.PK_BookID">
+
+                                @if (book.image.Path != null)
+                                {
+                                <img src="@book.image.Path" style="width:100px; height:100px" class="img-fluid " alt="@book.book.BookTitle">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/imgs/book-0.jpg" style="width:100px; height:100px" class="img-fluid " alt="@book.book.BookTitle">
+
+                                }
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <!--Category & Title-->
+                            <h6 class="card-title" style="padding-top:15px;">
+
+                                <strong>
+
+                                    <a href="/Books/Detail/@book.book.PK_BookID">کتاب @book.book.BookTitle</a>
+
+                                </strong>
+
+                            </h6>
+
+                            @if (book.rate < 1)
+                            {
+                            <ul class="rating">
+
+                                <li><i class="fa fa-star-o"></i></li>
+
+                                <li><i class="fa fa-star-o"></i></li>
+
+                                <li><i class="fa fa-star-o"></i></li>
+
+                                <li><i class="fa fa-star-o"></i></li>
+
+                                <li><i class="fa fa-star-o"></i></li>
+
+                            </ul>
+                            }
+                            else if (book.rate < 2)
+                            {
+
+                                <ul class="rating">
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                </ul>
+                            }
+                            else if (book.rate < 3)
+                            {
+                                <ul class="rating">
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                </ul>
+                            }
+                            else if (book.rate < 4)
+                            {
+                                <ul class="rating">
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                </ul>
+                            }
+                            else if (book.rate < 5)
+                            {
+                                <ul class="rating">
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                </ul>
+                            }
+                            else if (book.rate >= 5)
+                            {
+                                <ul class="rating">
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                </ul>
+                            }
+                            <!--/.Card image-->
+
+                        </div>
+
+                        <div class="col-xs-12 col-md-12 card-block">
+
+                            <div class="col-md-12">
+                                <div class="row" style="height:120px">
+                                    <div class="col-md-12">
+                                        @if (book.book.Description.Length <= 150)
+                                        {
+                                            <p class="card-text">
+                                                @book.book.Description
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">
+
+                                                @book.book.Description.Substring(0, 150)
+
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="row" >
+                                    
+                                @if (book.sellinginfos.RealPrice != book.sellinginfos.SellerPrice)
+                                {
+                                        <div class="col-md-8">
+                                            <del class="discount">@book.sellinginfos.RealPrice تومان </del>
+
+                                            <br />
+                                            <span class="red-text"><b>@book.sellinginfos.SellerPrice تومان </b> </span>
+                                            </div>
+                                        <div class="col-md-4">
+                                            <a class="btn btn-default pull-left" data-toggle="tooltip" style="text-align:center" data-placement="top" title="اضافه کردن به سبد خرید"><i class="fa fa-shopping-cart" style="font-size:large;"></i> </a>
+                                        </div>
+
+                                }
+                                else
+                                {
+                                    <div class="col-md-8">
+                                        <span><b>@book.sellinginfos.RealPrice تومان </b> </span>
+                                        <br />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="btn btn-default" style="text-align:center" title="اضافه کردن به سبد خرید" href="/Books/Detail/@book.book.PK_BookID"><i class="fa fa-shopping-cart" style="font-size:large;"></i> </a>
+                                    </div>
+                                }
+                                </div>
+                            </div>
+                        <!--/.Card content-->
+                    </div>        
+                </div>
+            </article>
+        </section>
+    }
+</div>
+

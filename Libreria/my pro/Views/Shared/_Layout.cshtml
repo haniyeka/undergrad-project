@@ -1,0 +1,79 @@
+﻿@using my_pro.Models;
+@using my_pro.Models.BussinessTypes;
+
+@model HomePageModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title> @ViewBag.Title</title>
+
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/datepicker/persianDatepicker-default.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/Content/autocomplete/easy-autocomplete.css" rel="stylesheet" />
+    <link href="~/Content/css/mdb.css" rel="stylesheet" />
+    <link href="~/Content/mdb-rtl.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!--<link href="~/Content/bookstore-style.min.css" rel="stylesheet"/>-->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("meta", false)
+</head>
+
+<body>
+
+    <div class="header-wrapper">
+      @{ Html.RenderPartial("_Header", Model);}
+    </div>
+
+
+    <main class="content-wrapper">
+        
+    @RenderBody()
+
+    </main>
+
+    <div class="footer-wrapper">
+        <!--Footer-->
+        @{ Html.RenderPartial("_Footer");}
+        <!--/.Footer-->
+    </div>
+
+    <div class="components">
+
+        <!--Modal Login-->
+        @{ Html.RenderPartial("_Login"); }
+        <!-- /.Modal Login-->
+        <!-- Modal Register -->
+        @{ Html.RenderPartial("_Register");}
+        <!-- /.Modal Register -->
+        <!--Other Modals-->
+        @RenderSection("Components", false)
+        <!--/.Other Modals-->
+    </div>
+
+    <!--<script src="Scripts/bookstore.min.js"></script>-->
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Content/datepicker/persianDatepicker.min.js"></script>
+    <script src="~/Scripts/tether.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/mdb.min.js"></script>
+    <script src="~/Content/autocomplete/jquery.easy-autocomplete.min.js"></script>
+    @RenderSection("appJS",false)
+    <script src="~/Scripts/layout.js"></script>
+</body>
+
+</html>

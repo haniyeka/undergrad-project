@@ -1,0 +1,164 @@
+﻿@using my_pro.BussinessLogic;
+@using my_pro.Models.BussinessTypes;
+@model HomePageModel
+<div class="container">
+    <ul class="nav navbar-nav top-nav">
+        <li class="nav-item">
+            <a class="nav-link navbar-brand logo" style="padding-top:10px" href="/Home/Index" title="بوکنت" target="_blank">
+                <img src="~/Content/imgs/logo.png" title="بوکنت" alt="بوکنت" /></a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav">
+
+        <li class="nav-item">
+            <div class="title" style="padding:10px">
+                <h3 style="color:#33b2bb; font-weight:200;">فروشگاه اینترنتی کتاب <span style="color:#007881">بوکنت</span></h3>
+                <h6 style="color:#33b2bb; font-size:small;">ســـهولت و اطمینان خرید کتاب تنها با چند کلیک</h6>
+                <div class="row">
+                    <a href="/Home/Index"></a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav pull-left" style="padding-top:10px;">
+        <li class="nav-item active">
+
+            <a class="nav-link" href="/Home/Index">
+                <i class="fa fa-home"></i>  صفحه اصلی <span class="sr-only">(current)</span>
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a class="nav-link" href="/Home/ContactUs"> <i class="fa fa-envelope"></i>  تماس با ما</a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a class="nav-link" href="/Home/Tracking"> <i class="fa fa-flag"></i> پیگیری سفارش</a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a class="nav-link" href="/Home/AboutUs"> <i class="fa fa-info-circle"></i> درباره بوکنت</a>
+
+        </li>
+
+        @if (Model.User != null && Model.User.MemberType != 2)
+        {
+            <li class="nav-item dropdown basket" style="margin-top:-8px">
+
+                <a class="nav-link btn btn-primary dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> سبد خرید
+
+                    <span style="border-radius: 10rem;float: left;background-color:#85C1E9;margin-right:5px; font-size: 16px;width: 25px;text-align: center;color:#fff">@Model.User.Basket.Count()</span>
+
+                </a>
+
+
+                <div class="dropdown-menu dropdown-secondary dropdown-menu-left" aria-labelledby="dropdownMenu2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                    @foreach (var b in Model.User.Basket)
+                    {
+                    <!--First Notification-->
+                    <div class="media">
+
+                        <a class="media-left waves-light">
+                            @if (b.Book.image.Path != null)
+                            {
+                                <img class="img-circle" src="@b.Book.image.Path" alt="">
+                            }
+                            else
+                            {
+                                <img class="img-circle" src="~/Content/imgs/book-0.jpg" alt="">
+                            }
+                            
+
+                        </a>
+
+                        <div class="media-body">
+
+                            <h3 class="media-heading">
+                                <a href="/Books/Detail/@b.Book.book.PK_BookID">@b.Book.book.BookTitle</a> 
+                                <span class="black-text">(تعداد: @b.count)</span><span class="pull-left">
+                                <form method="post" action="/Books/DeleteInvoice">
+                                    <input type="hidden" name="invoiceID" value="@b.InvoiceInfo1.Pk_InvoiceID" />
+                                    <button type="submit" class="close"><i class="fa fa-times"></i></button>
+                                </form>
+                                </span></h3>
+
+                            
+                            <p>
+                                اثر @foreach (var w in b.Book.writers)
+                                { <span>@w.Fname @w.Lname .</span>} 
+                                <br />
+                                فروشنده :<a href="#">@b.Memberseller.Fname @b.Memberseller.Lname</a>
+                                
+                                <span class="pull-left" style="background-color:rgba(51, 178, 187, 0.2)">
+                                    @if (b.Book.sellinginfos.SellerPrice != b.Book.sellinginfos.RealPrice)
+                                    {
+                                        <span style="margin-right:90px" class="green-text">@(b.Book.sellinginfos.SellerPrice*b.count) تومان </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="">@(b.Book.sellinginfos.RealPrice * b.count)<span>تومان</span></span>
+                                    }
+                                </span>
+                            </p>
+                        </div>
+
+                    </div>
+                    <!--First Notification-->
+
+                    <hr />
+                    }
+                </div>
+
+            </li>
+
+        }
+
+        <li class="nav-item dropdown" style="margin-top:-8px">
+            @{var login = Session[MyStateVariables.LoggedIn];}
+            @if (login != null && (bool)login == true)
+            {
+                <a class="nav-link btn btn-danger dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i> @Session[MyStateVariables.Username]
+                </a>
+
+
+                <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+
+                    <a class="dropdown-item" href="/UserAccount/UserProfile" >پروفایل</a>
+
+                    <a class="dropdown-item" href="/UserAccount/Logout" >خروج</a>
+
+                </div>
+
+            }
+            else
+            {
+
+                <a class="nav-link btn btn-danger dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i> حساب کاربری
+                </a>
+
+                <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-login">ورود کاربر</a>
+
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-register">ثبت نام</a>
+
+                </div>
+            }
+
+        </li>
+
+
+
+        </ul>
+
+</div>

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "بوکنت|صفحه اصلی";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section meta{    
+<meta name="HandheldFriendly" content="True">
+
+<meta name="keywords" content="Shoppong,online,Book,Writer,publisher,translator,Book" />
+<meta name="description" content=". بوکنت بزرگترین وبسایت خرید آنلاین کتاب از فروشگاه های موجود در سطح کشور است ." />
+<meta property="og:article:section" content="خرید کتاب" />
+        <!-- Semantic META -->
+
+<link rel="canonical" href="" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Booknet" />
+<meta property="og:description" content="Booknet" />
+<meta property="og:url" content="" />
+<meta property="og:article:tag" content="Booknet" />
+}
+<div class="view main-bg">
+
+    @{Html.RenderPartial("_SearchBox"); }
+
+</div>
+
+<!--Main container-->
+<div class="container-fluid">
+    <!--Section: Discount-->
+    @*@{ Html.RenderPartial("_Discount");}*@
+    <!--/Section: Discoun-->
+    <!--Section: Today offers-->
+    @*@{ Html.RenderPartial("_todayOffers");}*@
+    <!--/Section: Today offers-->
+    <!--Section: Festival-->
+    @*@{ Html.RenderPartial("_Festivals");}*@
+    <!--/Section: Festival-->
+    <!--Section: Best offers-->
+    @*@{ Html.RenderPartial("_bestOffers");}*@
+    <!--/Section: Best offers-->
+
+    <hr />
+
+    <!--Section: Features-->
+    @*@{ Html.RenderPartial("_Features");}*@
+    <!--/Section: Features-->
+
+    <hr />
+
+    <!--Section: weblog-->
+    @{ Html.RenderPartial("_Weblogs");}
+    <!--/Section: weblog-->
+
+    
+</div>
+<!--/Main container-->
+
+@section appJS
+{
+<script src="~/Scripts/index.js"></script>
+}

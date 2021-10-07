@@ -1,0 +1,40 @@
+﻿@using my_pro.Models.BussinessTypes
+@model HomePageModel
+
+@{
+    ViewBag.Title = "Cat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "بوکنت|لیست کتاب ها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*@{ Html.RenderPartial("BookSearch");}*@
+
+
+    <div class="container main">
+
+        <div class="row">
+            <!--Right Column-->
+
+            <section class="col-md-3 filter-col">
+                @{ Html.RenderPartial("KeywordSearch");}
+
+                @{ Html.RenderPartial("FilterSidebar");}
+            </section>
+
+            <!--//Right Column-->
+
+            <section class="col-md-9">
+
+                @{ Html.RenderPartial("OrderBy");}
+
+                @{ Html.RenderPartial("BookList",Model.Books);}
+
+            </section>
+        </div>
+    </div>
+

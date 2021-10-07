@@ -1,0 +1,913 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onlinebookstoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="PK_AddressID" />
+    </Key>
+    <Property Name="PK_AddressID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FK_ProvinceID" Type="Int64" />
+    <Property Name="FK_CityID" Type="Int64" />
+    <Property Name="FK_CountryID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Address_Country" FromRole="Address" ToRole="Country" />
+    <NavigationProperty Name="Province" Relationship="Self.FK_Address_Province" FromRole="Address" ToRole="Province" />
+    <NavigationProperty Name="People" Relationship="Self.FK_Person_Address" FromRole="Address" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="PK_BookID" />
+    </Key>
+    <Property Name="PK_BookID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publicationyear" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrintNumber" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Numberof" Type="Int64" Nullable="false" />
+    <Property Name="edition" Type="Int32" Nullable="false" />
+    <Property Name="FK_PublicationID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Publication" Relationship="Self.FK_Book_Publication" FromRole="Book" ToRole="Publication" />
+    <NavigationProperty Name="BookImages" Relationship="Self.FK_BookImage_Book" FromRole="Book" ToRole="BookImage" />
+    <NavigationProperty Name="BookTags" Relationship="Self.FK_BookTage_Book" FromRole="Book" ToRole="BookTag" />
+    <NavigationProperty Name="BookTypes" Relationship="Self.FK_BookType_Book" FromRole="Book" ToRole="BookType" />
+  </EntityType>
+  <EntityType Name="BookImage">
+    <Key>
+      <PropertyRef Name="PK_BookImageID" />
+    </Key>
+    <Property Name="PK_BookImageID" Type="Int64" Nullable="false" />
+    <Property Name="FK_BookID" Type="Int64" Nullable="false" />
+    <Property Name="FK_ImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_BookImage_Book" FromRole="BookImage" ToRole="Book" />
+    <NavigationProperty Name="Image" Relationship="Self.FK_BookImage_Image" FromRole="BookImage" ToRole="Image" />
+  </EntityType>
+  <EntityType Name="BookMan">
+    <Key>
+      <PropertyRef Name="PK_BookMansID" />
+    </Key>
+    <Property Name="FK_PersonID" Type="Int64" Nullable="false" />
+    <Property Name="PK_BookMansID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Worksince" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_BookMans_Person" FromRole="BookMans" ToRole="Person" />
+    <NavigationProperty Name="BookMansProfessions" Relationship="Self.FK_BookMansProfession_BookMans" FromRole="BookMans" ToRole="BookMansProfession" />
+  </EntityType>
+  <EntityType Name="BookMansProfession">
+    <Key>
+      <PropertyRef Name="PK_BookMansProfessionID" />
+    </Key>
+    <Property Name="PK_BookMansProfessionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_BookMansID" Type="Int64" Nullable="false" />
+    <Property Name="FK_ProfessionTypeID" Type="Int64" Nullable="false" />
+    <Property Name="Since" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="BookMan" Relationship="Self.FK_BookMansProfession_BookMans" FromRole="BookMansProfession" ToRole="BookMans" />
+    <NavigationProperty Name="ProfessionType" Relationship="Self.FK_BookMansProfession_ProfessionType" FromRole="BookMansProfession" ToRole="ProfessionType" />
+  </EntityType>
+  <EntityType Name="BookTag">
+    <Key>
+      <PropertyRef Name="PK_BookTagID" />
+    </Key>
+    <Property Name="PK_BookTagID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_TagID" Type="Int64" Nullable="false" />
+    <Property Name="FK_BookID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_BookTage_Book" FromRole="BookTag" ToRole="Book" />
+    <NavigationProperty Name="Tag" Relationship="Self.FK_BookTage_Tag" FromRole="BookTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="BookType">
+    <Key>
+      <PropertyRef Name="PK_BookTypeID" />
+    </Key>
+    <Property Name="PK_BookTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_BookID" Type="Int64" Nullable="false" />
+    <Property Name="FK_TypeID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_BookType_Book" FromRole="BookType" ToRole="Book" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_BookType_Type" FromRole="BookType" ToRole="Types" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="PK_CityID" />
+    </Key>
+    <Property Name="PK_CityID" Type="Int64" Nullable="false" />
+    <Property Name="CityName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_City" FromRole="City" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="PK_CountyID" />
+    </Key>
+    <Property Name="PK_CountyID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_Country" FromRole="Country" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Domain">
+    <Key>
+      <PropertyRef Name="PK_DomainID" />
+    </Key>
+    <Property Name="PK_DomainID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DomainName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="People" Relationship="Self.FK_Person_Domain" FromRole="Domain" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="PK_ImageID" />
+    </Key>
+    <Property Name="PK_ImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TemporaryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Uploaddate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BookImages" Relationship="Self.FK_BookImage_Image" FromRole="Image" ToRole="BookImage" />
+    <NavigationProperty Name="People" Relationship="Self.FK_Person_Image" FromRole="Image" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="PK_MemberID" />
+    </Key>
+    <Property Name="PK_MemberID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_PersonID" Type="Int64" Nullable="false" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PassSalt" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="PassHash" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="FK_MemberTypeID" Type="Int64" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MemberType" Relationship="Self.FK_Member_MemberType" FromRole="Member" ToRole="MemberType" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Member_Person" FromRole="Member" ToRole="Person" />
+    <NavigationProperty Name="PersonSearchTags" Relationship="Self.FK_PersonSearchTag_Member" FromRole="Member" ToRole="PersonSearchTag" />
+  </EntityType>
+  <EntityType Name="MemberType">
+    <Key>
+      <PropertyRef Name="PK_MemberTypeID" />
+    </Key>
+    <Property Name="PK_MemberTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Member_MemberType" FromRole="MemberType" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PK_PersonID" />
+    </Key>
+    <Property Name="Fname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FK_UserID" Type="Int64" Nullable="false" />
+    <Property Name="FK_DomainID" Type="Int64" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FK_ImageID" Type="Int64" />
+    <Property Name="FK_AddressID" Type="Int64" />
+    <Property Name="PK_PersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_Person_Address" FromRole="Person" ToRole="Address" />
+    <NavigationProperty Name="BookMans" Relationship="Self.FK_BookMans_Person" FromRole="Person" ToRole="BookMans" />
+    <NavigationProperty Name="Domain" Relationship="Self.FK_Person_Domain" FromRole="Person" ToRole="Domain" />
+    <NavigationProperty Name="Image" Relationship="Self.FK_Person_Image" FromRole="Person" ToRole="Image" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Member_Person" FromRole="Person" ToRole="Member" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Person_User" FromRole="Person" ToRole="User" />
+    <NavigationProperty Name="Phones" Relationship="Self.FK_Phone_Person" FromRole="Person" ToRole="Phone" />
+  </EntityType>
+  <EntityType Name="PersonSearchTag">
+    <Key>
+      <PropertyRef Name="PK_PersonSerachTag" />
+    </Key>
+    <Property Name="PK_PersonSerachTag" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_TagID" Type="Int64" Nullable="false" />
+    <Property Name="FK_MemberID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_PersonSearchTag_Member" FromRole="PersonSearchTag" ToRole="Member" />
+    <NavigationProperty Name="Tag" Relationship="Self.FK_PersonSearchTag_Tag" FromRole="PersonSearchTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="PK_PhoneID" />
+    </Key>
+    <Property Name="PK_PhoneID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FK_PhoneTypeID" Type="Int64" Nullable="false" />
+    <Property Name="FK_PersonID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Phone_Person" FromRole="Phone" ToRole="Person" />
+    <NavigationProperty Name="PhoneType" Relationship="Self.FK_Phone_PhoneType" FromRole="Phone" ToRole="PhoneType" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="PK_PhoneTypeID" />
+    </Key>
+    <Property Name="PK_PhoneTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhoneTypeName" Type="Binary" MaxLength="15" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="Phones" Relationship="Self.FK_Phone_PhoneType" FromRole="PhoneType" ToRole="Phone" />
+  </EntityType>
+  <EntityType Name="ProfessionType">
+    <Key>
+      <PropertyRef Name="PK_ProfessionTypeID" />
+    </Key>
+    <Property Name="PK_ProfessionTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfrssionTypeName" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BookMansProfessions" Relationship="Self.FK_BookMansProfession_ProfessionType" FromRole="ProfessionType" ToRole="BookMansProfession" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="PK_ProvinceID" />
+    </Key>
+    <Property Name="PK_ProvinceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProvinceName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_Province" FromRole="Province" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Publication">
+    <Key>
+      <PropertyRef Name="PK_PublicationID" />
+    </Key>
+    <Property Name="PK_PublicationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PublicationName" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Publication" FromRole="Publication" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="PK_TagID" />
+    </Key>
+    <Property Name="PK_TagID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParentID" Type="Int64" />
+    <NavigationProperty Name="BookTags" Relationship="Self.FK_BookTage_Tag" FromRole="Tag" ToRole="BookTag" />
+    <NavigationProperty Name="PersonSearchTags" Relationship="Self.FK_PersonSearchTag_Tag" FromRole="Tag" ToRole="PersonSearchTag" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="PK_TypeID" />
+    </Key>
+    <Property Name="PK_TypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BookTypes" Relationship="Self.FK_BookType_Type" FromRole="Types" ToRole="BookType" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="PK_UserID" />
+    </Key>
+    <Property Name="PK_UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="People" Relationship="Self.FK_Person_User" FromRole="User" ToRole="Person" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_User_User" FromRole="User" ToRole="User1" />
+    <NavigationProperty Name="User2" Relationship="Self.FK_User_User" FromRole="User1" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Pk_ID" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="PasswordHash" />
+      <PropertyRef Name="PasswordSalt" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="Pk_ID" Type="Int64" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordHash" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="PasswordSalt" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Address_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="PK_CityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="PK_CountyID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Province">
+    <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="PK_ProvinceID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="PK_AddressID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Publication">
+    <End Role="Publication" Type="Self.Publication" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publication">
+        <PropertyRef Name="PK_PublicationID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="FK_PublicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookImage_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookImage" Type="Self.BookImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookImage">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookTage_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookTag" Type="Self.BookTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookTag">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookType_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookType" Type="Self.BookType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookType">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookImage_Image">
+    <End Role="Image" Type="Self.Image" Multiplicity="1" />
+    <End Role="BookImage" Type="Self.BookImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="PK_ImageID" />
+      </Principal>
+      <Dependent Role="BookImage">
+        <PropertyRef Name="FK_ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMans_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="BookMans" Type="Self.BookMan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="BookMans">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMansProfession_BookMans">
+    <End Role="BookMans" Type="Self.BookMan" Multiplicity="1" />
+    <End Role="BookMansProfession" Type="Self.BookMansProfession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookMans">
+        <PropertyRef Name="PK_BookMansID" />
+      </Principal>
+      <Dependent Role="BookMansProfession">
+        <PropertyRef Name="FK_BookMansID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMansProfession_ProfessionType">
+    <End Role="ProfessionType" Type="Self.ProfessionType" Multiplicity="1" />
+    <End Role="BookMansProfession" Type="Self.BookMansProfession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfessionType">
+        <PropertyRef Name="PK_ProfessionTypeID" />
+      </Principal>
+      <Dependent Role="BookMansProfession">
+        <PropertyRef Name="FK_ProfessionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookTage_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+    <End Role="BookTag" Type="Self.BookTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="PK_TagID" />
+      </Principal>
+      <Dependent Role="BookTag">
+        <PropertyRef Name="FK_TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookType_Type">
+    <End Role="Types" Type="Self.Type" Multiplicity="1" />
+    <End Role="BookType" Type="Self.BookType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="PK_TypeID" />
+      </Principal>
+      <Dependent Role="BookType">
+        <PropertyRef Name="FK_TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Domain">
+    <End Role="Domain" Type="Self.Domain" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Domain">
+        <PropertyRef Name="PK_DomainID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_DomainID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Image">
+    <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="PK_ImageID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_MemberType">
+    <End Role="MemberType" Type="Self.MemberType" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberType">
+        <PropertyRef Name="PK_MemberTypeID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="FK_MemberTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSearchTag_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="PersonSearchTag" Type="Self.PersonSearchTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="PersonSearchTag">
+        <PropertyRef Name="FK_MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="PK_UserID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSearchTag_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+    <End Role="PersonSearchTag" Type="Self.PersonSearchTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="PK_TagID" />
+      </Principal>
+      <Dependent Role="PersonSearchTag">
+        <PropertyRef Name="FK_TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_PhoneType">
+    <End Role="PhoneType" Type="Self.PhoneType" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="PK_PhoneTypeID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="FK_PhoneTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User1" Type="Self.User" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="PK_UserID" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="PK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="onlinebookstores" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="BookImages" EntityType="Self.BookImage" />
+    <EntitySet Name="BookMans" EntityType="Self.BookMan" />
+    <EntitySet Name="BookMansProfessions" EntityType="Self.BookMansProfession" />
+    <EntitySet Name="BookTags" EntityType="Self.BookTag" />
+    <EntitySet Name="BookTypes" EntityType="Self.BookType" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Domains" EntityType="Self.Domain" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="MemberTypes" EntityType="Self.MemberType" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="PersonSearchTags" EntityType="Self.PersonSearchTag" />
+    <EntitySet Name="Phones" EntityType="Self.Phone" />
+    <EntitySet Name="PhoneTypes" EntityType="Self.PhoneType" />
+    <EntitySet Name="ProfessionTypes" EntityType="Self.ProfessionType" />
+    <EntitySet Name="Provinces" EntityType="Self.Province" />
+    <EntitySet Name="Publications" EntityType="Self.Publication" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Province" Association="Self.FK_Address_Province">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Address" Association="Self.FK_Person_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Publication" Association="Self.FK_Book_Publication">
+      <End Role="Publication" EntitySet="Publications" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookImage_Book" Association="Self.FK_BookImage_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookImage" EntitySet="BookImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookTage_Book" Association="Self.FK_BookTage_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookTag" EntitySet="BookTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookType_Book" Association="Self.FK_BookType_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookType" EntitySet="BookTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookImage_Image" Association="Self.FK_BookImage_Image">
+      <End Role="Image" EntitySet="Images" />
+      <End Role="BookImage" EntitySet="BookImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMans_Person" Association="Self.FK_BookMans_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="BookMans" EntitySet="BookMans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMansProfession_BookMans" Association="Self.FK_BookMansProfession_BookMans">
+      <End Role="BookMans" EntitySet="BookMans" />
+      <End Role="BookMansProfession" EntitySet="BookMansProfessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMansProfession_ProfessionType" Association="Self.FK_BookMansProfession_ProfessionType">
+      <End Role="ProfessionType" EntitySet="ProfessionTypes" />
+      <End Role="BookMansProfession" EntitySet="BookMansProfessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookTage_Tag" Association="Self.FK_BookTage_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="BookTag" EntitySet="BookTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookType_Type" Association="Self.FK_BookType_Type">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="BookType" EntitySet="BookTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Domain" Association="Self.FK_Person_Domain">
+      <End Role="Domain" EntitySet="Domains" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Image" Association="Self.FK_Person_Image">
+      <End Role="Image" EntitySet="Images" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_MemberType" Association="Self.FK_Member_MemberType">
+      <End Role="MemberType" EntitySet="MemberTypes" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_Person" Association="Self.FK_Member_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSearchTag_Member" Association="Self.FK_PersonSearchTag_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="PersonSearchTag" EntitySet="PersonSearchTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_User" Association="Self.FK_Person_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_Person" Association="Self.FK_Phone_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSearchTag_Tag" Association="Self.FK_PersonSearchTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="PersonSearchTag" EntitySet="PersonSearchTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_PhoneType" Association="Self.FK_Phone_PhoneType">
+      <End Role="PhoneType" EntitySet="PhoneTypes" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="sp_AddAddress">
+      <Parameter Name="Aline" Mode="In" Type="String" />
+      <Parameter Name="Pocode" Mode="In" Type="String" />
+      <Parameter Name="CName" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="PName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBook">
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+      <Parameter Name="Pyear" Mode="In" Type="String" />
+      <Parameter Name="PNumber" Mode="In" Type="Int32" />
+      <Parameter Name="Descript" Mode="In" Type="String" />
+      <Parameter Name="Number" Mode="In" Type="Int64" />
+      <Parameter Name="edition" Mode="In" Type="Int32" />
+      <Parameter Name="pname" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookImage">
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+      <Parameter Name="Path" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookMans">
+      <Parameter Name="WSince" Mode="In" Type="DateTime" />
+      <Parameter Name="descript" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookMansProfession">
+      <Parameter Name="Since" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookTag">
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+      <Parameter Name="TagName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookType">
+      <Parameter Name="tname" Mode="In" Type="String" />
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddCity">
+      <Parameter Name="Cname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddCountry">
+      <Parameter Name="Coname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddDomain">
+      <Parameter Name="Dname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddImage">
+      <Parameter Name="TName" Mode="In" Type="String" />
+      <Parameter Name="UpDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PathAddress" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddPerson">
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="lname" Mode="In" Type="String" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="postalCode" Mode="In" Type="String" />
+      <Parameter Name="Path" Mode="In" Type="String" />
+      <Parameter Name="UID" Mode="In" Type="String" />
+      <Parameter Name="DID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddPhone">
+      <Parameter Name="PNumber" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddPhoneType">
+      <Parameter Name="PTName" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddProfessionType">
+      <Parameter Name="PTypeName" Mode="In" Type="Binary" />
+      <Parameter Name="Des" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddProvince">
+      <Parameter Name="Pname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Addpublicatio">
+      <Parameter Name="Pname" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddTag">
+      <Parameter Name="TName" Mode="In" Type="String" />
+      <Parameter Name="PId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddTypes">
+      <Parameter Name="TName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddUserName">
+      <Parameter Name="UsName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbook">
+      <Parameter Name="BookID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookImage">
+      <Parameter Name="BookImageID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookMans">
+      <Parameter Name="BookMansID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookMansProfession">
+      <Parameter Name="BookMansProfessionID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookTag">
+      <Parameter Name="BookTagID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookType">
+      <Parameter Name="BookTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteCity">
+      <Parameter Name="CityID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteCountry">
+      <Parameter Name="CountyID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteDomain">
+      <Parameter Name="DomainID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteImage">
+      <Parameter Name="ImageID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteMember">
+      <Parameter Name="MemberID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteMemberTypeID">
+      <Parameter Name="MemberTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePerson">
+      <Parameter Name="PersonID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePersonSearchTag">
+      <Parameter Name="PersonSerachTag" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePhone">
+      <Parameter Name="PhoneID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteProfessionType">
+      <Parameter Name="ProfessionTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteProvince">
+      <Parameter Name="ProvinceID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePublicationID">
+      <Parameter Name="PublicationID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteTag">
+      <Parameter Name="TagID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteType">
+      <Parameter Name="TypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteUser">
+      <Parameter Name="USerID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateAddress">
+      <Parameter Name="AddressLine" Mode="In" Type="String" />
+      <Parameter Name="postalcode" Mode="In" Type="String" />
+      <Parameter Name="AddressID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateBook">
+      <Parameter Name="BookTitle" Mode="In" Type="String" />
+      <Parameter Name="publicationyear" Mode="In" Type="String" />
+      <Parameter Name="PrintNumber" Mode="In" Type="Int32" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="numberof" Mode="In" Type="Int64" />
+      <Parameter Name="edition" Mode="In" Type="Int32" />
+      <Parameter Name="BookID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateBookMans">
+      <Parameter Name="Worksince" Mode="In" Type="DateTime" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="PersonID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateCity">
+      <Parameter Name="CityName" Mode="In" Type="String" />
+      <Parameter Name="CityID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateCountry">
+      <Parameter Name="CountryName" Mode="In" Type="String" />
+      <Parameter Name="CountryID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateDomain">
+      <Parameter Name="DomainName" Mode="In" Type="String" />
+      <Parameter Name="DomainID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateImage">
+      <Parameter Name="TemporaryName" Mode="In" Type="String" />
+      <Parameter Name="Uploaddate" Mode="In" Type="DateTime" />
+      <Parameter Name="Path" Mode="In" Type="String" />
+      <Parameter Name="ImageID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateMember">
+      <Parameter Name="PassSalt" Mode="In" Type="Binary" />
+      <Parameter Name="JoinDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Pathhash" Mode="In" Type="Binary" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="MemberID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatePerson">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="PersonID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatePhone">
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="PhoneID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateProfessionType">
+      <Parameter Name="ProfessionTypeName" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="ProfessionTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateProvince">
+      <Parameter Name="ProvinceName" Mode="In" Type="String" />
+      <Parameter Name="ProvinceID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatePulcati">
+      <Parameter Name="PublicationName" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="PublicationID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateTypes">
+      <Parameter Name="TypeName" Mode="In" Type="String" />
+      <Parameter Name="TypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateUser">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="UserID" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

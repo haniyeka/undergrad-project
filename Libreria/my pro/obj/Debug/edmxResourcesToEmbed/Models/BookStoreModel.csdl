@@ -1,0 +1,1138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onlinebookstoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="onlinebookstore" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_AddAddress">
+      <Parameter Name="Aline" Mode="In" Type="String" />
+      <Parameter Name="Pocode" Mode="In" Type="String" />
+      <Parameter Name="CName" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="PName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBook">
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+      <Parameter Name="Pyear" Mode="In" Type="String" />
+      <Parameter Name="PNumber" Mode="In" Type="Int32" />
+      <Parameter Name="Descript" Mode="In" Type="String" />
+      <Parameter Name="Number" Mode="In" Type="Int64" />
+      <Parameter Name="edition" Mode="In" Type="Int32" />
+      <Parameter Name="pname" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookImage">
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+      <Parameter Name="Path" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookMans">
+      <Parameter Name="WSince" Mode="In" Type="DateTime" />
+      <Parameter Name="descript" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookMansProfession">
+      <Parameter Name="Since" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookTag">
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+      <Parameter Name="TagName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddBookType">
+      <Parameter Name="tname" Mode="In" Type="String" />
+      <Parameter Name="BTitle" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddCity">
+      <Parameter Name="Cname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddCountry">
+      <Parameter Name="Coname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddDomain">
+      <Parameter Name="Dname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddImage">
+      <Parameter Name="TName" Mode="In" Type="String" />
+      <Parameter Name="UpDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PathAddress" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddPerson">
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="lname" Mode="In" Type="String" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="postalCode" Mode="In" Type="String" />
+      <Parameter Name="Path" Mode="In" Type="String" />
+      <Parameter Name="UID" Mode="In" Type="String" />
+      <Parameter Name="DID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddPhone">
+      <Parameter Name="PNumber" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddPhoneType">
+      <Parameter Name="PTName" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddProfessionType">
+      <Parameter Name="PTypeName" Mode="In" Type="Binary" />
+      <Parameter Name="Des" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddProvince">
+      <Parameter Name="Pname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Addpublicatio">
+      <Parameter Name="Pname" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddTag">
+      <Parameter Name="TName" Mode="In" Type="String" />
+      <Parameter Name="PId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddTypes">
+      <Parameter Name="TName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddUserName">
+      <Parameter Name="UsName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbook">
+      <Parameter Name="BookID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookImage">
+      <Parameter Name="BookImageID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookMans">
+      <Parameter Name="BookMansID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookMansProfession">
+      <Parameter Name="BookMansProfessionID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookTag">
+      <Parameter Name="BookTagID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletbookType">
+      <Parameter Name="BookTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteCity">
+      <Parameter Name="CityID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteCountry">
+      <Parameter Name="CountyID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteDomain">
+      <Parameter Name="DomainID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteImage">
+      <Parameter Name="ImageID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteMember">
+      <Parameter Name="MemberID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteMemberTypeID">
+      <Parameter Name="MemberTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePerson">
+      <Parameter Name="PersonID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePersonSearchTag">
+      <Parameter Name="PersonSerachTag" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePhone">
+      <Parameter Name="PhoneID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteProfessionType">
+      <Parameter Name="ProfessionTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteProvince">
+      <Parameter Name="ProvinceID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deletePublicationID">
+      <Parameter Name="PublicationID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteTag">
+      <Parameter Name="TagID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteType">
+      <Parameter Name="TypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_deleteUser">
+      <Parameter Name="USerID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateAddress">
+      <Parameter Name="AddressLine" Mode="In" Type="String" />
+      <Parameter Name="postalcode" Mode="In" Type="String" />
+      <Parameter Name="AddressID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateBook">
+      <Parameter Name="BookTitle" Mode="In" Type="String" />
+      <Parameter Name="publicationyear" Mode="In" Type="String" />
+      <Parameter Name="PrintNumber" Mode="In" Type="Int32" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="numberof" Mode="In" Type="Int64" />
+      <Parameter Name="edition" Mode="In" Type="Int32" />
+      <Parameter Name="BookID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateBookMans">
+      <Parameter Name="Worksince" Mode="In" Type="DateTime" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="PersonID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateCity">
+      <Parameter Name="CityName" Mode="In" Type="String" />
+      <Parameter Name="CityID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateCountry">
+      <Parameter Name="CountryName" Mode="In" Type="String" />
+      <Parameter Name="CountryID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateDomain">
+      <Parameter Name="DomainName" Mode="In" Type="String" />
+      <Parameter Name="DomainID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateImage">
+      <Parameter Name="TemporaryName" Mode="In" Type="String" />
+      <Parameter Name="Uploaddate" Mode="In" Type="DateTime" />
+      <Parameter Name="Path" Mode="In" Type="String" />
+      <Parameter Name="ImageID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateMember">
+      <Parameter Name="PassSalt" Mode="In" Type="Binary" />
+      <Parameter Name="JoinDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Pathhash" Mode="In" Type="Binary" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="MemberID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatePerson">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="birthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="PersonID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatePhone">
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="PhoneID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateProfessionType">
+      <Parameter Name="ProfessionTypeName" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="ProfessionTypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateProvince">
+      <Parameter Name="ProvinceName" Mode="In" Type="String" />
+      <Parameter Name="ProvinceID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatePulcati">
+      <Parameter Name="PublicationName" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="PublicationID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateTypes">
+      <Parameter Name="TypeName" Mode="In" Type="String" />
+      <Parameter Name="TypeID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateUser">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="UserID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Addresses" EntityType="onlinebookstoreModel.Address" />
+    <EntitySet Name="AgeCategories" EntityType="onlinebookstoreModel.AgeCategory" />
+    <EntitySet Name="Books" EntityType="onlinebookstoreModel.Book" />
+    <EntitySet Name="BookImages" EntityType="onlinebookstoreModel.BookImage" />
+    <EntitySet Name="BookMans" EntityType="onlinebookstoreModel.BookMan" />
+    <EntitySet Name="BookMansProfessions" EntityType="onlinebookstoreModel.BookMansProfession" />
+    <EntitySet Name="BookRates" EntityType="onlinebookstoreModel.BookRate" />
+    <EntitySet Name="BookTags" EntityType="onlinebookstoreModel.BookTag" />
+    <EntitySet Name="Cities" EntityType="onlinebookstoreModel.City" />
+    <EntitySet Name="Comments" EntityType="onlinebookstoreModel.Comment" />
+    <EntitySet Name="Domains" EntityType="onlinebookstoreModel.Domain" />
+    <EntitySet Name="Favorites" EntityType="onlinebookstoreModel.Favorite" />
+    <EntitySet Name="Images" EntityType="onlinebookstoreModel.Image" />
+    <EntitySet Name="InvoiceInfoes" EntityType="onlinebookstoreModel.InvoiceInfo" />
+    <EntitySet Name="Members" EntityType="onlinebookstoreModel.Member" />
+    <EntitySet Name="MemberTypes" EntityType="onlinebookstoreModel.MemberType" />
+    <EntitySet Name="PayTypes" EntityType="onlinebookstoreModel.PayType" />
+    <EntitySet Name="People" EntityType="onlinebookstoreModel.Person" />
+    <EntitySet Name="PersonSearchTags" EntityType="onlinebookstoreModel.PersonSearchTag" />
+    <EntitySet Name="ProfessionTypes" EntityType="onlinebookstoreModel.ProfessionType" />
+    <EntitySet Name="Provinces" EntityType="onlinebookstoreModel.Province" />
+    <EntitySet Name="Publications" EntityType="onlinebookstoreModel.Publication" />
+    <EntitySet Name="SellingInfoes" EntityType="onlinebookstoreModel.SellingInfo" />
+    <EntitySet Name="States" EntityType="onlinebookstoreModel.State" />
+    <EntitySet Name="sysdiagrams" EntityType="onlinebookstoreModel.sysdiagram" />
+    <EntitySet Name="Tags" EntityType="onlinebookstoreModel.Tag" />
+    <EntitySet Name="Users" EntityType="onlinebookstoreModel.User" />
+    <EntitySet Name="Admins" EntityType="onlinebookstoreModel.Admin" />
+    <EntitySet Name="Viw_IfRepetitiveEmail" EntityType="onlinebookstoreModel.Viw_IfRepetitiveEmail" />
+    <AssociationSet Name="FK_Address_City" Association="onlinebookstoreModel.FK_Address_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Province" Association="onlinebookstoreModel.FK_Address_Province">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Address" Association="onlinebookstoreModel.FK_Person_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_AgeCategory" Association="onlinebookstoreModel.FK_Book_AgeCategory">
+      <End Role="AgeCategory" EntitySet="AgeCategories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Publication" Association="onlinebookstoreModel.FK_Book_Publication">
+      <End Role="Publication" EntitySet="Publications" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookImage_Book" Association="onlinebookstoreModel.FK_BookImage_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookImage" EntitySet="BookImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookRate_Book" Association="onlinebookstoreModel.FK_BookRate_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookRate" EntitySet="BookRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookTage_Book" Association="onlinebookstoreModel.FK_BookTage_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookTag" EntitySet="BookTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Book" Association="onlinebookstoreModel.FK_Comment_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favorite_Book" Association="onlinebookstoreModel.FK_Favorite_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Favorite" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_Book" Association="onlinebookstoreModel.FK_InvoiceInfo_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellingInfo_Book" Association="onlinebookstoreModel.FK_SellingInfo_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="SellingInfo" EntitySet="SellingInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookImage_Image" Association="onlinebookstoreModel.FK_BookImage_Image">
+      <End Role="Image" EntitySet="Images" />
+      <End Role="BookImage" EntitySet="BookImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMansProfession_BookMans" Association="onlinebookstoreModel.FK_BookMansProfession_BookMans">
+      <End Role="BookMan" EntitySet="BookMans" />
+      <End Role="BookMansProfession" EntitySet="BookMansProfessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMansProfession_ProfessionType" Association="onlinebookstoreModel.FK_BookMansProfession_ProfessionType">
+      <End Role="ProfessionType" EntitySet="ProfessionTypes" />
+      <End Role="BookMansProfession" EntitySet="BookMansProfessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookRate_Member" Association="onlinebookstoreModel.FK_BookRate_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="BookRate" EntitySet="BookRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookTage_Tag" Association="onlinebookstoreModel.FK_BookTage_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="BookTag" EntitySet="BookTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Member" Association="onlinebookstoreModel.FK_Comment_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Domain" Association="onlinebookstoreModel.FK_Person_Domain">
+      <End Role="Domain" EntitySet="Domains" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favorite_Member" Association="onlinebookstoreModel.FK_Favorite_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Favorite" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Image" Association="onlinebookstoreModel.FK_Person_Image">
+      <End Role="Image" EntitySet="Images" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_InvoiceInfo" Association="onlinebookstoreModel.FK_InvoiceInfo_InvoiceInfo">
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+      <End Role="InvoiceInfo1" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_Member" Association="onlinebookstoreModel.FK_InvoiceInfo_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_Member1" Association="onlinebookstoreModel.FK_InvoiceInfo_Member1">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_PayType" Association="onlinebookstoreModel.FK_InvoiceInfo_PayType">
+      <End Role="PayType" EntitySet="PayTypes" />
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_SellingInfo" Association="onlinebookstoreModel.FK_InvoiceInfo_SellingInfo">
+      <End Role="SellingInfo" EntitySet="SellingInfoes" />
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceInfo_State" Association="onlinebookstoreModel.FK_InvoiceInfo_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_MemberType" Association="onlinebookstoreModel.FK_Member_MemberType">
+      <End Role="MemberType" EntitySet="MemberTypes" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_Person" Association="onlinebookstoreModel.FK_Member_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSearchTag_Member" Association="onlinebookstoreModel.FK_PersonSearchTag_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="PersonSearchTag" EntitySet="PersonSearchTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellingInfo_Member" Association="onlinebookstoreModel.FK_SellingInfo_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="SellingInfo" EntitySet="SellingInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_User" Association="onlinebookstoreModel.FK_Person_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSearchTag_Tag" Association="onlinebookstoreModel.FK_PersonSearchTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="PersonSearchTag" EntitySet="PersonSearchTags" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="PK_AddressID" />
+    </Key>
+    <Property Name="PK_AddressID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressLine" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FK_ProvinceID" Type="Int64" />
+    <Property Name="FK_CityID" Type="Int64" />
+    <NavigationProperty Name="City" Relationship="onlinebookstoreModel.FK_Address_City" FromRole="Address" ToRole="City" />
+    <NavigationProperty Name="Province" Relationship="onlinebookstoreModel.FK_Address_Province" FromRole="Address" ToRole="Province" />
+    <NavigationProperty Name="People" Relationship="onlinebookstoreModel.FK_Person_Address" FromRole="Address" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="AgeCategory">
+    <Key>
+      <PropertyRef Name="PK_AgeCategory" />
+    </Key>
+    <Property Name="PK_AgeCategory" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgeCategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="onlinebookstoreModel.FK_Book_AgeCategory" FromRole="AgeCategory" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="PK_BookID" />
+    </Key>
+    <Property Name="PK_BookID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Publicationyear" Type="Int64" Nullable="false" />
+    <Property Name="PrintNumber" Type="Int64" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumberofPages" Type="Int64" Nullable="false" />
+    <Property Name="edition" Type="Int32" Nullable="false" />
+    <Property Name="FK_PublicationID" Type="Int64" Nullable="false" />
+    <Property Name="FK_AgeCategoryID" Type="Int64" />
+    <Property Name="isDeletes" Type="Boolean" />
+    <NavigationProperty Name="AgeCategory" Relationship="onlinebookstoreModel.FK_Book_AgeCategory" FromRole="Book" ToRole="AgeCategory" />
+    <NavigationProperty Name="Publication" Relationship="onlinebookstoreModel.FK_Book_Publication" FromRole="Book" ToRole="Publication" />
+    <NavigationProperty Name="BookImages" Relationship="onlinebookstoreModel.FK_BookImage_Book" FromRole="Book" ToRole="BookImage" />
+    <NavigationProperty Name="BookRates" Relationship="onlinebookstoreModel.FK_BookRate_Book" FromRole="Book" ToRole="BookRate" />
+    <NavigationProperty Name="BookTags" Relationship="onlinebookstoreModel.FK_BookTage_Book" FromRole="Book" ToRole="BookTag" />
+    <NavigationProperty Name="Comments" Relationship="onlinebookstoreModel.FK_Comment_Book" FromRole="Book" ToRole="Comment" />
+    <NavigationProperty Name="Favorites" Relationship="onlinebookstoreModel.FK_Favorite_Book" FromRole="Book" ToRole="Favorite" />
+    <NavigationProperty Name="InvoiceInfoes" Relationship="onlinebookstoreModel.FK_InvoiceInfo_Book" FromRole="Book" ToRole="InvoiceInfo" />
+    <NavigationProperty Name="SellingInfoes" Relationship="onlinebookstoreModel.FK_SellingInfo_Book" FromRole="Book" ToRole="SellingInfo" />
+  </EntityType>
+  <EntityType Name="BookImage">
+    <Key>
+      <PropertyRef Name="PK_BookImageID" />
+    </Key>
+    <Property Name="PK_BookImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_BookID" Type="Int64" Nullable="false" />
+    <Property Name="FK_ImageID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_BookImage_Book" FromRole="BookImage" ToRole="Book" />
+    <NavigationProperty Name="Image" Relationship="onlinebookstoreModel.FK_BookImage_Image" FromRole="BookImage" ToRole="Image" />
+  </EntityType>
+  <EntityType Name="BookMan">
+    <Key>
+      <PropertyRef Name="PK_BookMansID" />
+    </Key>
+    <Property Name="PK_BookMansID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Worksince" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bdate" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Fk_Image" Type="Int64" />
+    <NavigationProperty Name="BookMansProfessions" Relationship="onlinebookstoreModel.FK_BookMansProfession_BookMans" FromRole="BookMan" ToRole="BookMansProfession" />
+  </EntityType>
+  <EntityType Name="BookMansProfession">
+    <Key>
+      <PropertyRef Name="PK_BookMansProfessionID" />
+    </Key>
+    <Property Name="PK_BookMansProfessionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_BookMansID" Type="Int64" Nullable="false" />
+    <Property Name="FK_ProfessionTypeID" Type="Int64" Nullable="false" />
+    <Property Name="Since" Type="DateTime" Precision="0" />
+    <Property Name="Fk_BookID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="BookMan" Relationship="onlinebookstoreModel.FK_BookMansProfession_BookMans" FromRole="BookMansProfession" ToRole="BookMan" />
+    <NavigationProperty Name="ProfessionType" Relationship="onlinebookstoreModel.FK_BookMansProfession_ProfessionType" FromRole="BookMansProfession" ToRole="ProfessionType" />
+  </EntityType>
+  <EntityType Name="BookRate">
+    <Key>
+      <PropertyRef Name="Pk_RateID" />
+    </Key>
+    <Property Name="Pk_RateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_memberID" Type="Int64" Nullable="false" />
+    <Property Name="Rate" Type="Byte" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Fk_BookID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_BookRate_Book" FromRole="BookRate" ToRole="Book" />
+    <NavigationProperty Name="Member" Relationship="onlinebookstoreModel.FK_BookRate_Member" FromRole="BookRate" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="BookTag">
+    <Key>
+      <PropertyRef Name="PK_BookTagID" />
+    </Key>
+    <Property Name="PK_BookTagID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_TagID" Type="Int64" Nullable="false" />
+    <Property Name="FK_BookID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_BookTage_Book" FromRole="BookTag" ToRole="Book" />
+    <NavigationProperty Name="Tag" Relationship="onlinebookstoreModel.FK_BookTage_Tag" FromRole="BookTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="PK_CityID" />
+    </Key>
+    <Property Name="PK_CityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Addresses" Relationship="onlinebookstoreModel.FK_Address_City" FromRole="City" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Pk_CommentID" />
+    </Key>
+    <Property Name="Pk_CommentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_BookID" Type="Int64" Nullable="false" />
+    <Property Name="Fk_memberID" Type="Int64" Nullable="false" />
+    <Property Name="Comment1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_Comment_Book" FromRole="Comment" ToRole="Book" />
+    <NavigationProperty Name="Member" Relationship="onlinebookstoreModel.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Domain">
+    <Key>
+      <PropertyRef Name="PK_DomainID" />
+    </Key>
+    <Property Name="PK_DomainID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DomainName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="People" Relationship="onlinebookstoreModel.FK_Person_Domain" FromRole="Domain" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Favorite">
+    <Key>
+      <PropertyRef Name="Pk_FavoriteID" />
+    </Key>
+    <Property Name="Pk_FavoriteID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_BookID" Type="Int64" Nullable="false" />
+    <Property Name="Fk_memberID" Type="Int64" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_Favorite_Book" FromRole="Favorite" ToRole="Book" />
+    <NavigationProperty Name="Member" Relationship="onlinebookstoreModel.FK_Favorite_Member" FromRole="Favorite" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="PK_ImageID" />
+    </Key>
+    <Property Name="PK_ImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TemporaryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Uploaddate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BookImages" Relationship="onlinebookstoreModel.FK_BookImage_Image" FromRole="Image" ToRole="BookImage" />
+    <NavigationProperty Name="People" Relationship="onlinebookstoreModel.FK_Person_Image" FromRole="Image" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="InvoiceInfo">
+    <Key>
+      <PropertyRef Name="Pk_InvoiceID" />
+    </Key>
+    <Property Name="Pk_InvoiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_BookID" Type="Int64" Nullable="false" />
+    <Property Name="Fk_memberIDseller" Type="Int64" Nullable="false" />
+    <Property Name="Fk_memberIDbuyer" Type="Int64" Nullable="false" />
+    <Property Name="Fk_StateID" Type="Int64" Nullable="false" />
+    <Property Name="FK_SellingInfo" Type="Int64" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TrackingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fk_PayType" Type="Int64" Nullable="false" />
+    <Property Name="Count" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_InvoiceInfo_Book" FromRole="InvoiceInfo" ToRole="Book" />
+    <NavigationProperty Name="InvoiceInfo1" Relationship="onlinebookstoreModel.FK_InvoiceInfo_InvoiceInfo" FromRole="InvoiceInfo" ToRole="InvoiceInfo1" />
+    <NavigationProperty Name="InvoiceInfo2" Relationship="onlinebookstoreModel.FK_InvoiceInfo_InvoiceInfo" FromRole="InvoiceInfo1" ToRole="InvoiceInfo" />
+    <NavigationProperty Name="Member" Relationship="onlinebookstoreModel.FK_InvoiceInfo_Member" FromRole="InvoiceInfo" ToRole="Member" />
+    <NavigationProperty Name="Member1" Relationship="onlinebookstoreModel.FK_InvoiceInfo_Member1" FromRole="InvoiceInfo" ToRole="Member" />
+    <NavigationProperty Name="PayType" Relationship="onlinebookstoreModel.FK_InvoiceInfo_PayType" FromRole="InvoiceInfo" ToRole="PayType" />
+    <NavigationProperty Name="SellingInfo" Relationship="onlinebookstoreModel.FK_InvoiceInfo_SellingInfo" FromRole="InvoiceInfo" ToRole="SellingInfo" />
+    <NavigationProperty Name="State" Relationship="onlinebookstoreModel.FK_InvoiceInfo_State" FromRole="InvoiceInfo" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="PK_MemberID" />
+    </Key>
+    <Property Name="PK_MemberID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_PersonID" Type="Int64" Nullable="false" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PassSalt" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="PassHash" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="FK_MemberTypeID" Type="Int64" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BookRates" Relationship="onlinebookstoreModel.FK_BookRate_Member" FromRole="Member" ToRole="BookRate" />
+    <NavigationProperty Name="Comments" Relationship="onlinebookstoreModel.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
+    <NavigationProperty Name="Favorites" Relationship="onlinebookstoreModel.FK_Favorite_Member" FromRole="Member" ToRole="Favorite" />
+    <NavigationProperty Name="InvoiceInfoes" Relationship="onlinebookstoreModel.FK_InvoiceInfo_Member" FromRole="Member" ToRole="InvoiceInfo" />
+    <NavigationProperty Name="InvoiceInfoes1" Relationship="onlinebookstoreModel.FK_InvoiceInfo_Member1" FromRole="Member" ToRole="InvoiceInfo" />
+    <NavigationProperty Name="MemberType" Relationship="onlinebookstoreModel.FK_Member_MemberType" FromRole="Member" ToRole="MemberType" />
+    <NavigationProperty Name="Person" Relationship="onlinebookstoreModel.FK_Member_Person" FromRole="Member" ToRole="Person" />
+    <NavigationProperty Name="PersonSearchTags" Relationship="onlinebookstoreModel.FK_PersonSearchTag_Member" FromRole="Member" ToRole="PersonSearchTag" />
+    <NavigationProperty Name="SellingInfoes" Relationship="onlinebookstoreModel.FK_SellingInfo_Member" FromRole="Member" ToRole="SellingInfo" />
+  </EntityType>
+  <EntityType Name="MemberType">
+    <Key>
+      <PropertyRef Name="PK_MemberTypeID" />
+    </Key>
+    <Property Name="PK_MemberTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Members" Relationship="onlinebookstoreModel.FK_Member_MemberType" FromRole="MemberType" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="PayType">
+    <Key>
+      <PropertyRef Name="Pk_PayTypeID" />
+    </Key>
+    <Property Name="Pk_PayTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaytypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InvoiceInfoes" Relationship="onlinebookstoreModel.FK_InvoiceInfo_PayType" FromRole="PayType" ToRole="InvoiceInfo" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PK_PersonID" />
+    </Key>
+    <Property Name="Fname" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Lname" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="FK_UserID" Type="Int64" Nullable="false" />
+    <Property Name="FK_DomainID" Type="Int64" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FK_ImageID" Type="Int64" />
+    <Property Name="FK_AddressID" Type="Int64" />
+    <Property Name="PK_PersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhoneNumber" Type="Int64" />
+    <NavigationProperty Name="Address" Relationship="onlinebookstoreModel.FK_Person_Address" FromRole="Person" ToRole="Address" />
+    <NavigationProperty Name="Domain" Relationship="onlinebookstoreModel.FK_Person_Domain" FromRole="Person" ToRole="Domain" />
+    <NavigationProperty Name="Image" Relationship="onlinebookstoreModel.FK_Person_Image" FromRole="Person" ToRole="Image" />
+    <NavigationProperty Name="Members" Relationship="onlinebookstoreModel.FK_Member_Person" FromRole="Person" ToRole="Member" />
+    <NavigationProperty Name="User" Relationship="onlinebookstoreModel.FK_Person_User" FromRole="Person" ToRole="User" />
+  </EntityType>
+  <EntityType Name="PersonSearchTag">
+    <Key>
+      <PropertyRef Name="PK_PersonSerachTag" />
+    </Key>
+    <Property Name="PK_PersonSerachTag" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_TagID" Type="Int64" Nullable="false" />
+    <Property Name="FK_MemberID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="onlinebookstoreModel.FK_PersonSearchTag_Member" FromRole="PersonSearchTag" ToRole="Member" />
+    <NavigationProperty Name="Tag" Relationship="onlinebookstoreModel.FK_PersonSearchTag_Tag" FromRole="PersonSearchTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="ProfessionType">
+    <Key>
+      <PropertyRef Name="PK_ProfessionTypeID" />
+    </Key>
+    <Property Name="PK_ProfessionTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfrssionTypeName" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BookMansProfessions" Relationship="onlinebookstoreModel.FK_BookMansProfession_ProfessionType" FromRole="ProfessionType" ToRole="BookMansProfession" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="PK_ProvinceID" />
+    </Key>
+    <Property Name="PK_ProvinceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProvinceName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Addresses" Relationship="onlinebookstoreModel.FK_Address_Province" FromRole="Province" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Publication">
+    <Key>
+      <PropertyRef Name="PK_PublicationID" />
+    </Key>
+    <Property Name="PK_PublicationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PublicationName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="onlinebookstoreModel.FK_Book_Publication" FromRole="Publication" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="SellingInfo">
+    <Key>
+      <PropertyRef Name="Pk_SellingInfoID" />
+    </Key>
+    <Property Name="Pk_SellingInfoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_BookID" Type="Int64" Nullable="false" />
+    <Property Name="Fk_memberID" Type="Int64" Nullable="false" />
+    <Property Name="SellerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="RealPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="isUsed" Type="Boolean" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isExpired" Type="Boolean" />
+    <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+    <Property Name="Do_Exist" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="onlinebookstoreModel.FK_SellingInfo_Book" FromRole="SellingInfo" ToRole="Book" />
+    <NavigationProperty Name="InvoiceInfoes" Relationship="onlinebookstoreModel.FK_InvoiceInfo_SellingInfo" FromRole="SellingInfo" ToRole="InvoiceInfo" />
+    <NavigationProperty Name="Member" Relationship="onlinebookstoreModel.FK_SellingInfo_Member" FromRole="SellingInfo" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Pk_StateID" />
+    </Key>
+    <Property Name="Pk_StateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InvoiceInfoes" Relationship="onlinebookstoreModel.FK_InvoiceInfo_State" FromRole="State" ToRole="InvoiceInfo" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="PK_TagID" />
+    </Key>
+    <Property Name="PK_TagID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParentID" Type="Int64" />
+    <NavigationProperty Name="BookTags" Relationship="onlinebookstoreModel.FK_BookTage_Tag" FromRole="Tag" ToRole="BookTag" />
+    <NavigationProperty Name="PersonSearchTags" Relationship="onlinebookstoreModel.FK_PersonSearchTag_Tag" FromRole="Tag" ToRole="PersonSearchTag" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="PK_UserID" />
+    </Key>
+    <Property Name="PK_UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="People" Relationship="onlinebookstoreModel.FK_Person_User" FromRole="User" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Pk_ID" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="PasswordHash" />
+      <PropertyRef Name="PasswordSalt" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="Pk_ID" Type="Int64" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="PasswordSalt" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Viw_IfRepetitiveEmail">
+    <Key>
+      <PropertyRef Name="DomainName" />
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="DomainName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Address_City">
+    <End Type="onlinebookstoreModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="onlinebookstoreModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="PK_CityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Province">
+    <End Type="onlinebookstoreModel.Province" Role="Province" Multiplicity="0..1" />
+    <End Type="onlinebookstoreModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="PK_ProvinceID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Address">
+    <End Type="onlinebookstoreModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="onlinebookstoreModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="PK_AddressID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_AgeCategory">
+    <End Type="onlinebookstoreModel.AgeCategory" Role="AgeCategory" Multiplicity="0..1" />
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgeCategory">
+        <PropertyRef Name="PK_AgeCategory" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="FK_AgeCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Publication">
+    <End Type="onlinebookstoreModel.Publication" Role="Publication" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publication">
+        <PropertyRef Name="PK_PublicationID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="FK_PublicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookImage_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookImage" Role="BookImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookImage">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookRate_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookRate" Role="BookRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookRate">
+        <PropertyRef Name="Fk_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookTage_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookTag" Role="BookTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookTag">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Fk_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favorite_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Favorite" Role="Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="Fk_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellingInfo_Book">
+    <End Type="onlinebookstoreModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.SellingInfo" Role="SellingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="SellingInfo">
+        <PropertyRef Name="Fk_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookImage_Image">
+    <End Type="onlinebookstoreModel.Image" Role="Image" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookImage" Role="BookImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="PK_ImageID" />
+      </Principal>
+      <Dependent Role="BookImage">
+        <PropertyRef Name="FK_ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMansProfession_BookMans">
+    <End Type="onlinebookstoreModel.BookMan" Role="BookMan" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookMansProfession" Role="BookMansProfession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookMan">
+        <PropertyRef Name="PK_BookMansID" />
+      </Principal>
+      <Dependent Role="BookMansProfession">
+        <PropertyRef Name="FK_BookMansID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMansProfession_ProfessionType">
+    <End Type="onlinebookstoreModel.ProfessionType" Role="ProfessionType" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookMansProfession" Role="BookMansProfession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfessionType">
+        <PropertyRef Name="PK_ProfessionTypeID" />
+      </Principal>
+      <Dependent Role="BookMansProfession">
+        <PropertyRef Name="FK_ProfessionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookRate_Member">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookRate" Role="BookRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="BookRate">
+        <PropertyRef Name="Fk_memberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookTage_Tag">
+    <End Type="onlinebookstoreModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.BookTag" Role="BookTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="PK_TagID" />
+      </Principal>
+      <Dependent Role="BookTag">
+        <PropertyRef Name="FK_TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Member">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Fk_memberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Domain">
+    <End Type="onlinebookstoreModel.Domain" Role="Domain" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Domain">
+        <PropertyRef Name="PK_DomainID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_DomainID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favorite_Member">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Favorite" Role="Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="Fk_memberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Image">
+    <End Type="onlinebookstoreModel.Image" Role="Image" Multiplicity="0..1" />
+    <End Type="onlinebookstoreModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="PK_ImageID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_InvoiceInfo">
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceInfo">
+        <PropertyRef Name="Pk_InvoiceID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo1">
+        <PropertyRef Name="Pk_InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_Member">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo">
+        <PropertyRef Name="Fk_memberIDbuyer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_Member1">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo">
+        <PropertyRef Name="Fk_memberIDseller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_PayType">
+    <End Type="onlinebookstoreModel.PayType" Role="PayType" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayType">
+        <PropertyRef Name="Pk_PayTypeID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo">
+        <PropertyRef Name="Fk_PayType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_SellingInfo">
+    <End Type="onlinebookstoreModel.SellingInfo" Role="SellingInfo" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SellingInfo">
+        <PropertyRef Name="Pk_SellingInfoID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo">
+        <PropertyRef Name="FK_SellingInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceInfo_State">
+    <End Type="onlinebookstoreModel.State" Role="State" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.InvoiceInfo" Role="InvoiceInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Pk_StateID" />
+      </Principal>
+      <Dependent Role="InvoiceInfo">
+        <PropertyRef Name="Fk_StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_MemberType">
+    <End Type="onlinebookstoreModel.MemberType" Role="MemberType" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberType">
+        <PropertyRef Name="PK_MemberTypeID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="FK_MemberTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_Person">
+    <End Type="onlinebookstoreModel.Person" Role="Person" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSearchTag_Member">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.PersonSearchTag" Role="PersonSearchTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="PersonSearchTag">
+        <PropertyRef Name="FK_MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellingInfo_Member">
+    <End Type="onlinebookstoreModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.SellingInfo" Role="SellingInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="SellingInfo">
+        <PropertyRef Name="Fk_memberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_User">
+    <End Type="onlinebookstoreModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="onlinebookstoreModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="PK_UserID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSearchTag_Tag">
+    <End Type="onlinebookstoreModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="onlinebookstoreModel.PersonSearchTag" Role="PersonSearchTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="PK_TagID" />
+      </Principal>
+      <Dependent Role="PersonSearchTag">
+        <PropertyRef Name="FK_TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

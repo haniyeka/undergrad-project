@@ -1,0 +1,108 @@
+﻿html, body {
+    direction: ltr;
+    font-family: sans-serif;
+}
+
+
+
+
+
+/*nav -------------------------------------*/
+
+.top-nav a .fa {
+    padding-left: 0;
+    padding-right: .5rem;
+}
+
+.hdr-phone {
+    float: right;
+}
+
+.navbar .login {
+    float: right;
+}
+
+.divider-new h2 {
+    font-weight: bold;
+}
+
+.dropdown-menu .media a.media-left {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+.dropdown-menu .media .media-body {
+    text-align: left;
+}
+
+.top-nav .nav-item {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+
+
+
+
+/*weblog*/
+
+.weblog .blog-item {
+    padding-left: 0;
+    padding-right: .9375rem;
+}
+
+.weblog .blog-img {
+    padding-left: 0;
+}
+
+.weblog .overlay:after {
+    border-right: 15px solid #fff;
+    border-left: 0;
+    right: 14px;
+}
+
+/* bottom-menu ------------------------*/
+
+.bottom-menu ul {
+    text-align: left;
+}
+
+
+/* book-list -------------------------*/
+
+.hr-card .card-title {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+@media (min-width: 34em) {
+
+    .book-list .price {
+        text-align: left;
+    }
+}
+
+
+/*book-details -----------------------*/
+
+.book-detail h1 {
+    padding-left: 0;
+    padding-right: 2rem;
+}
+
+.list-title i,
+.v-list i {
+    padding-left: 0;
+    padding-right: .5rem;
+}
+
+
+
+
+
+
+/*components*/
+
+.modal-ext .modal-content .options {
+    text-align: left;
+}

@@ -1,0 +1,705 @@
+﻿@using my_pro.Models.BussinessTypes
+@using my_pro.BussinessLogic
+@model HomePageModel
+@{
+    ViewBag.Title = "booknet|book-detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section meta
+{
+    
+    <link href="~/Content/font/booknet/css/booknet.css" rel="stylesheet" />
+    <link href="~/Content/css/starrr.css" rel="stylesheet" />
+
+    <style>
+        /*.my-popover-content {
+            display: none;
+        }*/
+    </style>
+}
+
+        <div class="container main book-detail">
+
+            <div class="row detail-header">
+
+                <div class="col-md-12">
+
+                    <a href="#">بازگشت به لیست</a>
+
+                    <ul>
+                        @foreach (var t in Model.Books.First().tags)
+                        {
+                            <li><a href="/Books/Cat/@t.PK_TagID">@t.TagName</a></li>
+                        }
+                        <li>@Model.Books.First().book.BookTitle</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <section>
+
+                <!--Book Title-->
+                <div class="row">
+
+                    <div class="col-md-6 right">
+
+                        <header class="radio-inline">
+
+                            <h3 class="inline-ul">کتاب @Model.Books.First().book.BookTitle </h3>
+                            <br />
+                            <h4 class="inline-ul">
+                            <ul class="rating">
+                            @if (@Model.Books.First().rate < 1)
+                            {
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                            }
+                            else if (@Model.Books.First().rate < 2)
+                            {
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                            }
+                            else if (@Model.Books.First().rate < 3)
+                            {
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                            }
+                            else if (@Model.Books.First().rate < 4)
+                            {
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                            }
+                            else if (@Model.Books.First().rate < 5)
+                            {
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star-o"></i></li>
+
+                            }
+                            else if (@Model.Books.First().rate >= 5)
+                            {
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                                    <li><i class="fa fa-star"></i></li>
+
+                            }
+                                <li style="margin-right:20px; color:black"> @Model.Books.First().rate (@Model.Books.First().ratecount امتیاز) </li> 
+                                </ul>
+                                </h4>
+                        </header>
+
+                    </div>
+
+                    <div class="col-md-6 ">
+                        
+                        <div class="">
+                            <ul class="pull-left inline-ul">
+                                <li>
+                                    <button type="button" class="btn btn-rounded btn-default" data-toggle="collapse" data-target="#rateCollapse"><i style="font-size:18px; margin-top:10px" class="fa fa-star-o"></i></button>
+                                </li>
+
+                                <li>
+                                    @if (Model.User !=null && Model.User.favorites.ToList().Where(a => a.book.PK_BookID == Model.Books.First().book.PK_BookID).FirstOrDefault() != null)
+                                    {
+                                        <button class="btn btn-rounded btn-default favorite" data-placement="bottom" title="حذف از علاقه مندی ها"><i style="font-size:18px; margin-top:10px" class="fa fa-heart"></i></button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-rounded btn-default favorite" data-placement="bottom" title="افزودن به علاقه مندی ها"><i style="font-size:18px; margin-top:10px" class="fa fa-heart fa-heart-o"></i></button>
+                                    }
+                                    </li>
+
+                                <li>
+                                    <button class="btn btn-rounded btn-default " data-placement="bottom"><i style="font-size:18px;" class="fa fa-shopping-cart"></i>@Model.Books.First().invoiceCount      تعداد سفارش</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pull-left" style="margin-left:30px; margin-top:9px">
+                            <div id="rateCollapse" class="collapse" style="border: 2px solid #ddd; border-radius: 25px; padding:7px">
+                                @{var login = Session[MyStateVariables.LoggedIn];}
+                                @if (login != null && (bool)login == true)
+                                {
+                                    <span style="padding-top:-8px"> امتیاز دهید </span>	
+                                    <div  class='starrr' id='star1'></div>
+                                }
+                                else
+                                {
+                                    <span class="red-text">برای امتیاز دادن باید وارد شوید</span>
+                                }
+                                
+                            </div>
+                            <div id="FavError" style="border: 2px solid #ddd; border-radius: 25px; padding:7px; display:none;">
+                                <span class="red-text">برای افزودن به علاقه مندی ها باید وارد شوید</span>
+                            </div>
+                            <input type="hidden" class='choice' style='display: none;' />
+                        </div>
+                    </div>
+
+                </div>
+                <!--/Book Title-->
+
+
+                <div class="row" style="margin-top:20px">
+
+                    <div class="col-md-4">
+                        @if (Model.Books.First().image.Path != null)
+                        {
+                        <img style="width:250px; height:350px;margin-bottom:50px; " src="@Model.Books.First().image.Path" alt="کتاب @Model.Books.First().book.BookTitle">
+                        }
+                        else
+                        {
+                            <img style="width:250px; height:350px;margin-bottom:50px; " src="~/Content/imgs/book-0.jpg" alt="کتاب @Model.Books.First().book.BookTitle">
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-striped" style="font-size:20px;">
+                            <tbody>
+                                <tr>
+                                    <td class="default-color th">
+                                        انتشارات:
+                                    </td>
+                                    <td>
+                                        @Model.Books.First().publication.PublicationName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="default-color th">
+                                        نویسنده:
+                                    </td>
+                                    <td>
+                                        @foreach (var w in Model.Books.First().writers)
+                                        {
+                                            <a href="/PersonInfo/@w.PK_BookMansID"><span>@w.Fname </span><span>@w.Lname</span></a>
+                                        }
+
+                                    </td>
+                                </tr>
+                                @if (Model.Books.First().Translators.Count >= 1)
+                                {
+                                    <tr>
+                                        <td class="default-color th">
+                                            مترجم:
+                                        </td>
+                                        <td>
+                                            @foreach (var t in Model.Books.First().Translators)
+                                            {
+                                                <a href="/PersonInfo/@t.PK_BookMansID"><span>@t.Fname </span><span>@t.Lname</span></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td class="default-color th">
+                                        تعداد صفحات:
+                                    </td>
+                                    <td>
+                                        @Model.Books.First().book.NumberofPages
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="default-color th">
+                                        چاپ:
+                                    </td>
+                                    <td>
+                                        @Model.Books.First().book.PrintNumber
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="default-color th">
+                                        ویراست:
+                                    </td>
+                                    <td>
+                                        @Model.Books.First().book.edition
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="default-color th">
+                                        تاریخ چاپ:
+                                    </td>
+                                    <td>
+                                        @Model.Books.First().book.Publicationyear
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="default-color th">
+                                        موضوع:
+                                    </td>
+                                    <td>
+                                        @foreach (var t in Model.Books.First().tags)
+                                        {
+                                            <span>@t.TagName .</span>
+                                        }
+                                    </td>
+                                </tr>
+                                @if (Model.Books.First().age != null)
+                                {
+                                    <tr>
+                                        <td class="default-color th">
+                                            گروه سنی:
+                                        </td>
+                                        <td>
+                                            @Model.Books.First().age.AgeCategoryName
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <span class="price">قیمت:</span>
+                               @if (Model.Books.First().sellinginfos.SellerPrice != Model.Books.First().sellinginfos.RealPrice)
+                               {
+                                <del><span class="price" style="margin-right:25px">@Model.Books.First().sellinginfos.RealPrice <del>تومان </del></span></del>
+                                <span style="margin-right:90px" class="price green-text">@Model.Books.First().sellinginfos.SellerPrice تومان </span>
+                               }
+                               else
+                               {
+                                <span class="price">@Model.Books.First().sellinginfos.RealPrice <span>تومان</span></span>
+                               }
+                            </div>
+                            @if (Model.User != null && Model.User.MemberType !=2)
+                            {
+                                <div class="col-md-7">
+                                    <form method="post" action="/Books/AddtoBasket" id="sendTobasket">
+                                        <div class="col-md-3">
+                                            <input type="hidden" name="bookid" value="@Model.Books.FirstOrDefault().book.PK_BookID" />
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" name="bookcount" min="1" max="100" class="form-control requiredInputs" required value="1" id="bookcount" />
+                                                    <label for="bookcount">تعداد</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-9">
+                                            <button type="submit" class="btn btn-default pull-left" id="addBooktoBasket" style="font-size:20px"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            }
+                            else if (Model.User == null)
+                            {
+                                <div class="col-md-7">
+                                    <div class="text-center"><br />
+                                        <strong style="font-size:15px" class="text-danger">برای خرید کتاب باید وارد شوید</strong>
+                                    </div>
+                                </div>
+                            }
+                                                    </div>
+                    </div>
+    
+                </div>
+                <hr />
+            </section>
+
+            <section>
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!--Rooms Panel-->
+                        <div class="card rooms-panel">
+
+                            <h3 class="card-header default-color white-text">توضیحات</h3>
+                            <div class="card-block" style="padding:40px">
+                                <h3 class="grey-text">@Model.Books.First().book.BookTitle اثر 
+                                @foreach (var w in Model.Books.First().writers)
+                                {
+                                    <span>@w.Fname @w.Lname</span> 
+                                }
+                                </h3><br />
+                                <p class="description" style="font-size:18px">
+                                    @Model.Books.First().book.Description
+                                </p>
+                            </div>
+
+                        </div>
+                        <!--/.Rooms Panel-->
+
+                    </div>
+
+                </div>
+
+            </section>
+            <!--Author box-->
+            <section>
+                <div class="row">
+                <div class="col-md-8">
+                    <div class="author-box">
+                        <!--Name-->
+                        <h3 class="h3-responsive text-center">درباره فروشنده</h3>
+                        <hr>
+                        <div class="row">
+                            <!--Avatar-->
+                            <div class="col-12 col-sm-2">
+                                @if (Model.Books.FirstOrDefault().Seller.Image != null)
+                                {
+                                    <img src="@Model.Books.FirstOrDefault().Seller.Image" class="img-fluid rounded-circle">
+                                }
+                                else
+                                {
+                                    if (Model.Books.FirstOrDefault().Seller.Gender == "F")
+                                    {
+                                        <img class="img-fluid rounded-circle" alt="..." src="~/Content/AdminPanelStyles/img/faces/face-0.jpg" />
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid rounded-circle" alt="..." src="~/Content/AdminPanelStyles/img/faces/face-1.jpg" />
+                                    }
+
+                                }
+                            </div>
+                            <!--Author Data-->
+                            <div class="col-md-10">
+                                <p><strong>@Model.Books.FirstOrDefault().Seller.Fname @Model.Books.FirstOrDefault().Seller.Lname</strong> <small>(نام کاربری: @Model.Books.FirstOrDefault().Seller.Username)</small></p>
+
+                                <div class="personal-sm">
+                                    <a class="email-ic" href="mailto:@Model.Books.FirstOrDefault().Seller.EmailAddress"><i class="fa fa-envelope"> </i> @Model.Books.FirstOrDefault().Seller.EmailAddress</a>
+                                    @if (Model.Books.FirstOrDefault().Seller.Phone != null)
+                                    {
+                                        <a class="phone"><i class="fa fa-phone"></i>@Model.Books.FirstOrDefault().Seller.Phone</a>
+                                    }
+                                </div>
+                                <p>@Model.Books.FirstOrDefault().Seller.Description</p>
+                                <p class="hidden-md-down">
+                                    آدرس فروشگاه:@Model.Books.FirstOrDefault().Seller.City
+                                    @Model.Books.FirstOrDefault().Seller.Address
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Author box-->
+                </div>
+
+                    <div class="col-md-4">
+                        <div class="author-box">
+                            <!--Name-->
+                            <h3 class="h3-responsive text-center">درباره کتاب</h3>
+                            <hr>
+                                <h5> توضیحات مربوط به فروش :</h5> @Model.Books.FirstOrDefault().sellinginfos.Description
+                            
+                        </div>
+                        </div>
+                        <!--/.Author box-->
+
+                    </div>
+                <hr />
+            </section>
+                
+            <section>
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Nav tabs -->
+
+                        <h3 class="text-black"><i class="fa fa-comment "></i> نظرات مهمانان <span class="label blue">@Model.Books.First().comments.Count</span></h3>
+
+                        <!-- Tab panels -->
+                        <div class="tab-content">
+
+
+                            <div class="" id="panel12" role="tabpanel">
+
+                                <!--Section: Comments list-->
+                                <section>
+
+                                    <!--Main wrapper-->
+                                    <div class="comments-list">
+                                        @foreach (var c in Model.Books.First().comments)
+                                    {
+                                    <!--First row-->
+                                    <article class="row">
+
+                                        <!--Image column-->
+                                        <div class="col-sm-2 col-xs-12">
+                                            @if (c.member.Image != null)
+                                                {
+                                                <img class="avatar border-white" alt="@c.member.Username" src="@c.member.Image" />
+                                                }
+                                                else
+                                                {
+                                                    if (c.member.Gender == "F")
+                                                    {
+                                                <img class="avatar border-white" alt="@c.member.Username" src="~/Content/AdminPanelStyles/img/faces/face-0.jpg" />
+                                                    }
+                                                    else
+                                                    {
+                                                <img class="avatar border-white" alt="@c.member.Username" src="~/Content/AdminPanelStyles/img/faces/face-1.jpg" />
+                                                    }
+                                                }
+                                        </div>
+                                        <!--/.Image column-->
+                                        <!--Content column-->
+                                        <div class="col-sm-10 col-xs-12">
+
+                                            <h3 class="user-name">
+                                                @c.member.Username
+                                            </h3>
+
+
+                                            @if (Model.User != null && c.member.Pk_memberID == Model.User.Pk_memberID)
+                                                {
+                                                <form action="/Books/RemoveComment" method="post">
+                                                    <input type="hidden" name="bookID" value="@Model.Books.First().book.PK_BookID" />
+                                                    <input type="hidden" name="commentID" value="@c.Pk_CommentID" />
+                                                    <button type="submit" class="close text-danger" style="float:inherit; font-size:medium" aria-label="Close">(&times;حذف)</button>
+                                                </form>
+
+                                                }
+
+                                            <div class="card-data">
+
+                                                <ul>
+
+                                                    <li class="comment-date"><i class="fa fa-clock-o"></i> @Utility.ConvertToPersianDate(c.Date)</li>
+
+                                                </ul>
+
+                                            </div>
+
+                                            <p class="comment-text">
+                                                @c.Comment1
+                                            </p>
+
+                                        </div>
+                                        <!--/.Content column-->
+
+                                    </article>
+                                    <!--/.First row-->
+                                    }
+                                    </div>
+                                    <!--/.Main wrapper-->
+
+                                </section>
+
+                                <!--/Section: Comments list-->
+                                <!--Section: Leave a reply (Logged In User)-->
+                                <section>
+
+                                    <!--Leave a reply form-->
+                                    <div class="reply-form">
+
+                                        <h3 class="section-heading">نظر خود را بیان کنید </h3>
+                                        @if (Model.User != null)
+                                    {
+                                    <p class="text-xs-center">(کاربر لاگین شده : @Model.User.Username )</p>
+                                    }
+                                        <p id="commentError" class="text-xs-center red-text" style="display:none">برای گذاشتن کامنت باید وارد شوید</p>
+                                        <!--Third row-->
+                                        <div class="row">
+
+                                            <!--Image column-->
+                                            <div class="col-sm-2 col-xs-12">
+                                                @if (Model.User != null)
+                                            {
+                                                if (Model.User.Image != null)
+                                                {
+                                            <img alt="..." src="@Model.User.Image" />
+                                                }
+                                                else
+                                                {
+                                                    if (Model.User.Gender == "F")
+                                                    {
+                                            <img alt="..." src="~/Content/AdminPanelStyles/img/faces/face-0.jpg" />
+                                                    }
+                                                    else
+                                                    {
+                                            <img alt="..." src="~/Content/AdminPanelStyles/img/faces/face-1.jpg" />
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                            <img alt="..." src="~/Content/AdminPanelStyles/img/faces/face-1.jpg" />
+                                            }
+                                            </div>
+
+                                            <!--/.Image column-->
+                                            <!--Content column-->
+                                            <form id="commentForm" method="post" action="/Books/AddComment">
+                                                <input type="hidden" value="@Model.Books.First().book.PK_BookID" name="id" />
+                                                <div class="col-sm-10 col-xs-12">
+
+                                                    <div class="md-form">
+
+                                                        <textarea id="form8" class="md-textarea" name="Comment"></textarea>
+
+                                                        <label for="form8">نظر شما</label>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="text-xs-center">
+
+                                                    <button type="submit" id="addcomment" class="btn btn-primary">ثبت نظر</button>
+
+                                                </div>
+                                            </form>
+                                            <!--/.Content column-->
+
+                                        </div>
+                                        <!--/.Third row-->
+
+                                    </div>
+                                    <!--/.Leave a reply form-->
+
+                                </section>
+                                <!--/Section: Leave a reply (Logged In User)-->
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+        </div>
+
+    @section appJS
+{
+        <!--Google Maps-->
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyC5B_59iSUg98hjQkWHpWJBCKe7iw7XSdU"></script>
+        <script src="~/Scripts/starrr.js"></script>
+        <script>
+            // api-key     AIzaSyC5B_59iSUg98hjQkWHpWJBCKe7iw7XSdU
+            $(document).ready(function () {
+
+                $('#star1').starrr({
+                    change: function (e, value) {
+                        if (value) {
+                            $('.choice').text(value);
+                            rateeee(value);
+                        } else {
+                            $('.choice').text('');
+                        }
+                    }
+                });
+
+                function rateeee(val){
+                    var bookid = @Model.Books.First().book.PK_BookID;
+                    var data = {BookID :bookid , RateVal: val};
+                    $.ajax({
+                        url: "/Books/RateBook/",
+                        type: "POST",
+                        data: data,
+                        success: (function (data) {
+                            //if (data == false) {
+                            //    $(window).reload();
+                            //}
+                            //else {
+                            //}
+
+                        }),
+                        error: (function (xhr) {
+
+                        }),
+                    });
+                }
+
+                $('.favorite').click(function(){
+                    if('@Convert.ToBoolean(Session[MyStateVariables.LoggedIn]).ToString()' == 'False')
+                    {
+                        $('#FavError').prop('style', 'display : true');
+                    }
+                    else{
+
+                        $('#FavError').prop('style', 'display : none');
+                        var bookid = @Model.Books.First().book.PK_BookID;
+                        var data = {BookID :bookid};
+                        var but = $(this).find('i');
+                        $.ajax({
+                            url: "/Books/Favorite/",
+                            type: "POST",
+                            data: data,
+                            success: (function (data) {
+                                but.toggleClass('fa-heart-o');
+                            }),
+                            error: (function (xhr) {
+
+                            }),
+                        });
+                    }
+                });
+                
+                $('#addcomment').click(function(e){
+                    e.preventDefault();
+                    if('@Convert.ToBoolean(Session[MyStateVariables.LoggedIn]).ToString()' == 'False')
+                    {
+                        $('#commentError').prop('style', 'display : true');
+                    }
+                    else{
+                        $('#commentForm').submit();
+                    }
+                });
+            });
+        </script>
+        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5B_59iSUg98hjQkWHpWJBCKe7iw7XSdU&callback=init_map"
+                type="text/javascript"></script>-->
+
+    }

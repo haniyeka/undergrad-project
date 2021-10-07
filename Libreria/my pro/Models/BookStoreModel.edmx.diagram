@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="587e0dc857944ff4aeffcc6e0ac01785" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="onlinebookstoreModel.Address" Width="1.5" PointX="3.75" PointY="19.875" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.AgeCategory" Width="1.5" PointX="1.5" PointY="3.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Book" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.BookImage" Width="1.5" PointX="3" PointY="12.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.BookMan" Width="1.5" PointX="3.75" PointY="4.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.BookMansProfession" Width="1.5" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.BookRate" Width="1.5" PointX="13.5" PointY="9.625" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.BookTag" Width="1.5" PointX="10.5" PointY="5.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.City" Width="1.5" PointX="1.5" PointY="21.5" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Comment" Width="1.5" PointX="13.5" PointY="15.625" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Domain" Width="1.5" PointX="3.75" PointY="15.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Favorite" Width="1.5" PointX="13.5" PointY="12.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Image" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.InvoiceInfo" Width="1.5" PointX="10.5" PointY="11.5" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Member" Width="1.5" PointX="8.25" PointY="11.625" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.MemberType" Width="1.5" PointX="6" PointY="9" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.PayType" Width="1.5" PointX="8.25" PointY="16.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Person" Width="1.5" PointX="6" PointY="11.875" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.PersonSearchTag" Width="1.5" PointX="10.5" PointY="8.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.ProfessionType" Width="1.5" PointX="3.75" PointY="1.25" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Province" Width="1.5" PointX="1.5" PointY="19.125" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Publication" Width="1.5" PointX="1.5" PointY="16" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.SellingInfo" Width="1.5" PointX="10.5" PointY="16.875" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.State" Width="1.5" PointX="8.25" PointY="19.125" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Tag" Width="1.5" PointX="8.25" PointY="8.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.User" Width="1.5" PointX="3.75" PointY="9.5" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Admin" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="onlinebookstoreModel.Viw_IfRepetitiveEmail" Width="1.5" PointX="7.75" PointY="4.75" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Address_City" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Address_Province" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Person_Address" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Book_AgeCategory" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Book_Publication" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookImage_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookRate_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookTage_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Comment_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Favorite_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_SellingInfo_Book" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookImage_Image" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookMansProfession_BookMans" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookMansProfession_ProfessionType" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookRate_Member" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_BookTage_Tag" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Comment_Member" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Person_Domain" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Favorite_Member" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Person_Image" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_InvoiceInfo" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_Member" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_Member1" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_PayType" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_SellingInfo" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_InvoiceInfo_State" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Member_MemberType" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Member_Person" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_PersonSearchTag_Member" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_SellingInfo_Member" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_Person_User" />
+        <AssociationConnector Association="onlinebookstoreModel.FK_PersonSearchTag_Tag" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

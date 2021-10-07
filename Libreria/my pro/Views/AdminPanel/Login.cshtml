@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-material-design.css" rel="stylesheet" />
+    <link href="~/Content/css/ripples.min.css" rel="stylesheet" />
+    <link href="~/Content/css/Login.css" rel="stylesheet" />
+    <title>Login</title>
+</head>
+<body>
+    <hgroup>
+        <h3>Administrator Panel</h3>
+    </hgroup>
+    <form>
+        <div class="group">
+            <input type="text"><span class="highlight"></span><span class="bar"></span>
+            <label>Username</label>
+        </div>
+        <div class="group">
+            <input type="password"><span class="highlight"></span><span class="bar"></span>
+            <label>Password</label>
+        </div>
+        <button type="button" class="button buttonColor buttonBlue">
+            Login
+            <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+        </button>
+    </form>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/login.js"></script>
+</body>
+
+</html>

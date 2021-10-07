@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="onlinebookstoreModelStoreContainer" CdmEntityContainer="onlinebookstores">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="PK_AddressID" ColumnName="PK_AddressID" />
+          <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="FK_ProvinceID" ColumnName="FK_ProvinceID" />
+          <ScalarProperty Name="FK_CityID" ColumnName="FK_CityID" />
+          <ScalarProperty Name="FK_CountryID" ColumnName="FK_CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="PK_BookID" ColumnName="PK_BookID" />
+          <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+          <ScalarProperty Name="Publicationyear" ColumnName="Publicationyear" />
+          <ScalarProperty Name="PrintNumber" ColumnName="PrintNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Numberof" ColumnName="Numberof" />
+          <ScalarProperty Name="edition" ColumnName="edition" />
+          <ScalarProperty Name="FK_PublicationID" ColumnName="FK_PublicationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookImages">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.BookImage">
+        <MappingFragment StoreEntitySet="BookImage">
+          <ScalarProperty Name="PK_BookImageID" ColumnName="PK_BookImageID" />
+          <ScalarProperty Name="FK_BookID" ColumnName="FK_BookID" />
+          <ScalarProperty Name="FK_ImageID" ColumnName="FK_ImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookMans">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.BookMan">
+        <MappingFragment StoreEntitySet="BookMans">
+          <ScalarProperty Name="FK_PersonID" ColumnName="FK_PersonID" />
+          <ScalarProperty Name="PK_BookMansID" ColumnName="PK_BookMansID" />
+          <ScalarProperty Name="Worksince" ColumnName="Worksince" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookMansProfessions">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.BookMansProfession">
+        <MappingFragment StoreEntitySet="BookMansProfession">
+          <ScalarProperty Name="PK_BookMansProfessionID" ColumnName="PK_BookMansProfessionID" />
+          <ScalarProperty Name="FK_BookMansID" ColumnName="FK_BookMansID" />
+          <ScalarProperty Name="FK_ProfessionTypeID" ColumnName="FK_ProfessionTypeID" />
+          <ScalarProperty Name="Since" ColumnName="Since" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookTags">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.BookTag">
+        <MappingFragment StoreEntitySet="BookTag">
+          <ScalarProperty Name="PK_BookTagID" ColumnName="PK_BookTagID" />
+          <ScalarProperty Name="FK_TagID" ColumnName="FK_TagID" />
+          <ScalarProperty Name="FK_BookID" ColumnName="FK_BookID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookTypes">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.BookType">
+        <MappingFragment StoreEntitySet="BookType">
+          <ScalarProperty Name="PK_BookTypeID" ColumnName="PK_BookTypeID" />
+          <ScalarProperty Name="FK_BookID" ColumnName="FK_BookID" />
+          <ScalarProperty Name="FK_TypeID" ColumnName="FK_TypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="PK_CityID" ColumnName="PK_CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="PK_CountyID" ColumnName="PK_CountyID" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Domains">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Domain">
+        <MappingFragment StoreEntitySet="Domain">
+          <ScalarProperty Name="PK_DomainID" ColumnName="PK_DomainID" />
+          <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="PK_ImageID" ColumnName="PK_ImageID" />
+          <ScalarProperty Name="TemporaryName" ColumnName="TemporaryName" />
+          <ScalarProperty Name="Uploaddate" ColumnName="Uploaddate" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Member">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="PK_MemberID" ColumnName="PK_MemberID" />
+          <ScalarProperty Name="FK_PersonID" ColumnName="FK_PersonID" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+          <ScalarProperty Name="PassSalt" ColumnName="PassSalt" />
+          <ScalarProperty Name="PassHash" ColumnName="PassHash" />
+          <ScalarProperty Name="FK_MemberTypeID" ColumnName="FK_MemberTypeID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberTypes">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.MemberType">
+        <MappingFragment StoreEntitySet="MemberType">
+          <ScalarProperty Name="PK_MemberTypeID" ColumnName="PK_MemberTypeID" />
+          <ScalarProperty Name="MemberTypeName" ColumnName="MemberTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+          <ScalarProperty Name="FK_DomainID" ColumnName="FK_DomainID" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="FK_ImageID" ColumnName="FK_ImageID" />
+          <ScalarProperty Name="FK_AddressID" ColumnName="FK_AddressID" />
+          <ScalarProperty Name="PK_PersonID" ColumnName="PK_PersonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonSearchTags">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.PersonSearchTag">
+        <MappingFragment StoreEntitySet="PersonSearchTag">
+          <ScalarProperty Name="PK_PersonSerachTag" ColumnName="PK_PersonSerachTag" />
+          <ScalarProperty Name="FK_TagID" ColumnName="FK_TagID" />
+          <ScalarProperty Name="FK_MemberID" ColumnName="FK_MemberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Phone">
+        <MappingFragment StoreEntitySet="Phone">
+          <ScalarProperty Name="PK_PhoneID" ColumnName="PK_PhoneID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="FK_PhoneTypeID" ColumnName="FK_PhoneTypeID" />
+          <ScalarProperty Name="FK_PersonID" ColumnName="FK_PersonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneTypes">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.PhoneType">
+        <MappingFragment StoreEntitySet="PhoneType">
+          <ScalarProperty Name="PK_PhoneTypeID" ColumnName="PK_PhoneTypeID" />
+          <ScalarProperty Name="PhoneTypeName" ColumnName="PhoneTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfessionTypes">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.ProfessionType">
+        <MappingFragment StoreEntitySet="ProfessionType">
+          <ScalarProperty Name="PK_ProfessionTypeID" ColumnName="PK_ProfessionTypeID" />
+          <ScalarProperty Name="ProfrssionTypeName" ColumnName="ProfrssionTypeName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="PK_ProvinceID" ColumnName="PK_ProvinceID" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publications">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Publication">
+        <MappingFragment StoreEntitySet="Publication">
+          <ScalarProperty Name="PK_PublicationID" ColumnName="PK_PublicationID" />
+          <ScalarProperty Name="PublicationName" ColumnName="PublicationName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Tag">
+        <MappingFragment StoreEntitySet="Tag">
+          <ScalarProperty Name="PK_TagID" ColumnName="PK_TagID" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Type">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="PK_TypeID" ColumnName="PK_TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="PK_UserID" ColumnName="PK_UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="onlinebookstoreModel.Admin">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="Pk_ID" ColumnName="Pk_ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_AddAddress" FunctionName="onlinebookstoreModel.Store.sp_AddAddress" />
+    <FunctionImportMapping FunctionImportName="sp_AddBook" FunctionName="onlinebookstoreModel.Store.sp_AddBook" />
+    <FunctionImportMapping FunctionImportName="sp_AddBookImage" FunctionName="onlinebookstoreModel.Store.sp_AddBookImage" />
+    <FunctionImportMapping FunctionImportName="sp_AddBookMans" FunctionName="onlinebookstoreModel.Store.sp_AddBookMans" />
+    <FunctionImportMapping FunctionImportName="sp_AddBookMansProfession" FunctionName="onlinebookstoreModel.Store.sp_AddBookMansProfession" />
+    <FunctionImportMapping FunctionImportName="sp_AddBookTag" FunctionName="onlinebookstoreModel.Store.sp_AddBookTag" />
+    <FunctionImportMapping FunctionImportName="sp_AddBookType" FunctionName="onlinebookstoreModel.Store.sp_AddBookType" />
+    <FunctionImportMapping FunctionImportName="sp_AddCity" FunctionName="onlinebookstoreModel.Store.sp_AddCity" />
+    <FunctionImportMapping FunctionImportName="sp_AddCountry" FunctionName="onlinebookstoreModel.Store.sp_AddCountry" />
+    <FunctionImportMapping FunctionImportName="sp_AddDomain" FunctionName="onlinebookstoreModel.Store.sp_AddDomain" />
+    <FunctionImportMapping FunctionImportName="sp_AddImage" FunctionName="onlinebookstoreModel.Store.sp_AddImage" />
+    <FunctionImportMapping FunctionImportName="sp_AddPerson" FunctionName="onlinebookstoreModel.Store.sp_AddPerson" />
+    <FunctionImportMapping FunctionImportName="sp_AddPhone" FunctionName="onlinebookstoreModel.Store.sp_AddPhone" />
+    <FunctionImportMapping FunctionImportName="sp_AddPhoneType" FunctionName="onlinebookstoreModel.Store.sp_AddPhoneType" />
+    <FunctionImportMapping FunctionImportName="sp_AddProfessionType" FunctionName="onlinebookstoreModel.Store.sp_AddProfessionType" />
+    <FunctionImportMapping FunctionImportName="sp_AddProvince" FunctionName="onlinebookstoreModel.Store.sp_AddProvince" />
+    <FunctionImportMapping FunctionImportName="sp_Addpublicatio" FunctionName="onlinebookstoreModel.Store.sp_Addpublicatio" />
+    <FunctionImportMapping FunctionImportName="sp_AddTag" FunctionName="onlinebookstoreModel.Store.sp_AddTag" />
+    <FunctionImportMapping FunctionImportName="sp_AddTypes" FunctionName="onlinebookstoreModel.Store.sp_AddTypes" />
+    <FunctionImportMapping FunctionImportName="sp_AddUserName" FunctionName="onlinebookstoreModel.Store.sp_AddUserName" />
+    <FunctionImportMapping FunctionImportName="sp_deletbook" FunctionName="onlinebookstoreModel.Store.sp_deletbook" />
+    <FunctionImportMapping FunctionImportName="sp_deletbookImage" FunctionName="onlinebookstoreModel.Store.sp_deletbookImage" />
+    <FunctionImportMapping FunctionImportName="sp_deletbookMans" FunctionName="onlinebookstoreModel.Store.sp_deletbookMans" />
+    <FunctionImportMapping FunctionImportName="sp_deletbookMansProfession" FunctionName="onlinebookstoreModel.Store.sp_deletbookMansProfession" />
+    <FunctionImportMapping FunctionImportName="sp_deletbookTag" FunctionName="onlinebookstoreModel.Store.sp_deletbookTag" />
+    <FunctionImportMapping FunctionImportName="sp_deletbookType" FunctionName="onlinebookstoreModel.Store.sp_deletbookType" />
+    <FunctionImportMapping FunctionImportName="sp_deleteCity" FunctionName="onlinebookstoreModel.Store.sp_deleteCity" />
+    <FunctionImportMapping FunctionImportName="sp_deleteCountry" FunctionName="onlinebookstoreModel.Store.sp_deleteCountry" />
+    <FunctionImportMapping FunctionImportName="sp_deleteDomain" FunctionName="onlinebookstoreModel.Store.sp_deleteDomain" />
+    <FunctionImportMapping FunctionImportName="sp_deleteImage" FunctionName="onlinebookstoreModel.Store.sp_deleteImage" />
+    <FunctionImportMapping FunctionImportName="sp_deleteMember" FunctionName="onlinebookstoreModel.Store.sp_deleteMember" />
+    <FunctionImportMapping FunctionImportName="sp_deleteMemberTypeID" FunctionName="onlinebookstoreModel.Store.sp_deleteMemberTypeID" />
+    <FunctionImportMapping FunctionImportName="sp_deletePerson" FunctionName="onlinebookstoreModel.Store.sp_deletePerson" />
+    <FunctionImportMapping FunctionImportName="sp_deletePersonSearchTag" FunctionName="onlinebookstoreModel.Store.sp_deletePersonSearchTag" />
+    <FunctionImportMapping FunctionImportName="sp_deletePhone" FunctionName="onlinebookstoreModel.Store.sp_deletePhone" />
+    <FunctionImportMapping FunctionImportName="sp_deleteProfessionType" FunctionName="onlinebookstoreModel.Store.sp_deleteProfessionType" />
+    <FunctionImportMapping FunctionImportName="sp_deleteProvince" FunctionName="onlinebookstoreModel.Store.sp_deleteProvince" />
+    <FunctionImportMapping FunctionImportName="sp_deletePublicationID" FunctionName="onlinebookstoreModel.Store.sp_deletePublicationID" />
+    <FunctionImportMapping FunctionImportName="sp_deleteTag" FunctionName="onlinebookstoreModel.Store.sp_deleteTag" />
+    <FunctionImportMapping FunctionImportName="sp_deleteType" FunctionName="onlinebookstoreModel.Store.sp_deleteType" />
+    <FunctionImportMapping FunctionImportName="sp_deleteUser" FunctionName="onlinebookstoreModel.Store.sp_deleteUser" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateAddress" FunctionName="onlinebookstoreModel.Store.sp_UpdateAddress" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateBook" FunctionName="onlinebookstoreModel.Store.sp_UpdateBook" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateBookMans" FunctionName="onlinebookstoreModel.Store.sp_UpdateBookMans" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateCity" FunctionName="onlinebookstoreModel.Store.sp_UpdateCity" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateCountry" FunctionName="onlinebookstoreModel.Store.sp_UpdateCountry" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateDomain" FunctionName="onlinebookstoreModel.Store.sp_UpdateDomain" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateImage" FunctionName="onlinebookstoreModel.Store.sp_UpdateImage" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateMember" FunctionName="onlinebookstoreModel.Store.sp_UpdateMember" />
+    <FunctionImportMapping FunctionImportName="sp_UpdatePerson" FunctionName="onlinebookstoreModel.Store.sp_UpdatePerson" />
+    <FunctionImportMapping FunctionImportName="sp_UpdatePhone" FunctionName="onlinebookstoreModel.Store.sp_UpdatePhone" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateProfessionType" FunctionName="onlinebookstoreModel.Store.sp_UpdateProfessionType" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateProvince" FunctionName="onlinebookstoreModel.Store.sp_UpdateProvince" />
+    <FunctionImportMapping FunctionImportName="sp_UpdatePulcati" FunctionName="onlinebookstoreModel.Store.sp_UpdatePulcati" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateTypes" FunctionName="onlinebookstoreModel.Store.sp_UpdateTypes" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateUser" FunctionName="onlinebookstoreModel.Store.sp_UpdateUser" />
+  </EntityContainerMapping>
+</Mapping>

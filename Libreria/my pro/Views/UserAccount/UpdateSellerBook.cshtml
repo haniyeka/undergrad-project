@@ -1,0 +1,462 @@
+﻿@using my_pro.Models.BussinessTypes
+@model HomePageModel
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section meta{
+    <link href="~/Content/css/mdb.css" rel="stylesheet" />
+    <link href="~/Content/css/mdb-rtl.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/css/profile.css" rel="stylesheet" />
+
+}
+<hr />
+<div class="container" style="padding-top:50px;padding-bottom:30px;">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs md-pills" id="userTabs" role="tablist" style="width:150px; ">
+
+                <li class="nav-item">
+                    <a class="nav-pills active" data-toggle="tab" href="#EditSellerBook" role="tab">
+                        <i class="fa fa-user"></i> ویرایش کتاب
+                    </a>
+                </li>
+
+            </ul>
+            <br />
+        </div>
+        <div class="col-md-9">
+            <!-- Tab panels -->
+            <div class="tab-content vertical">
+
+                <!--EditSellerBook_panel-->
+
+                <div class="tab-pane fade  active in" id="EditSellerBook" role="tabpanel">
+                    <form method="post" action="/UserAccount/UpdateSellerBook" class="Form" enctype="multipart/form-data">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">ویرایش کتاب جدید</h4>
+                                </div>
+                                <div class="content">
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="text" id="txt_Title" name="BookTitle" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().book.BookTitle">
+                                                    <input type="hidden" id="id" name="PK_BookID" value="@Model.Books.FirstOrDefault().book.PK_BookID" />
+                                                    <label for="txt_Title">عنوان </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" id="txt_NumberofPages" name="NumberofPages" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().book.NumberofPages">
+                                                    <label for="txt_NumberofPages"> تعداد صفحات </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" id="txt_Publicationyear" name="Publicationyear" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().book.Publicationyear">
+                                                    <label for="txt_Publicationyear"> سال انتشار </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" id="txt_PrintNumber" name="PrintNumber" class="form-control" value="@Model.Books.FirstOrDefault().book.PrintNumber">
+                                                    <label for="txt_PrintNumber"> شماره چاپ </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" id="txt_edition" name="edition" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().book.edition">
+                                                    <label for="txt_edition"> ویراست </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="md-form" id="AgeCategorySelect">
+                                                <select class="mdb-select requiredInputs" id="select_ageCategory" name="AgeCategoryID">
+                                                    <option value="" disabled>  گروه سنی</option>
+
+                                                    @foreach (var c in Model.AgeCategories)
+                                                    {
+                                                        if (c.PK_AgeCategory == Model.Books.FirstOrDefault().age.PK_AgeCategory)
+                                                        {
+                                                        <option value="@c.PK_AgeCategory" selected> @c.AgeCategoryName </option>
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <option value="@c.PK_AgeCategory"> @c.AgeCategoryName </option>
+
+                                                        }
+                                                    }
+
+
+                                                </select>
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" href="#collapseAgeCategory" aria-expanded="false" aria-controls="collapseAgeCategory" id="collapseAge">
+                                                    افزودن گروه سنی جدید <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseAgeCategory">
+                                                <div class="form-group">
+                                                    <div class="md-form">
+                                                        <input type="text" id="txt_agecategoryName" name="AgeCategoryName" class="form-control">
+                                                        <label for="txt_agecategoryName"> گروه سنی </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row"><div class="col-md-4"><p style="margin-right:12px; color:#9A9A9A;">نام نویسنده</p></div> </div>
+                                        <div class="col-md-4">
+
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().writers.Count > 0)
+                                                {
+                                                    <input type="text" id="txt_writer1" name="writer1" class="form-control Bookman requiredInputs" value="@Model.Books.FirstOrDefault().writers.FirstOrDefault().Fname @Model.Books.FirstOrDefault().writers.FirstOrDefault().Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_writer1" name="writer1" class="form-control Bookman requiredInputs" value="">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" href="#collapsewriter2" aria-expanded="false" aria-controls="collapsewriter2" id="collapseWriter1" class="collapsewriter">
+                                                    افزودن نویسنده <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsewriter2">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().writers.Count > 1)
+                                                {
+                                                    <input type="text" id="txt_writer2" name="writer2" class="form-control Bookman" value="@Model.Books.FirstOrDefault().writers[1].Fname @Model.Books.FirstOrDefault().writers[1].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_writer2" name="writer2" class="form-control Bookman">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" href="#collapsewriter3" aria-expanded="false" aria-controls="collapsewriter3" id="collapseWriter2" class="collapsewriter">
+                                                    افزودن نویسنده <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                     
+                                        <div class="col-md-4 collapse" id="collapsewriter3">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().writers.Count > 2)
+                                                {
+                                                    <input type="text" id="txt_writer3" name="writer3" class="form-control Bookman"  value="@Model.Books.FirstOrDefault().writers[2].Fname @Model.Books.FirstOrDefault().writers[2].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_writer3" name="writer3" class="form-control Bookman">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" href="#collapsewriter4" aria-expanded="false" aria-controls="collapsewriter4" id="collapseWriter3" class="collapsewriter">
+                                                    افزودن نویسنده <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsewriter4">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().writers.Count > 3)
+                                                {
+                                                    <input type="text" id="txt_writer4" name="writer4" class="form-control Bookman"  value="@Model.Books.FirstOrDefault().writers[3].Fname @Model.Books.FirstOrDefault().writers[3].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_writer4" name="writer4" class="form-control Bookman">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" href="#collapsewriter5" aria-expanded="false" aria-controls="collapsewriter5" id="collapseWriter4" class="collapsewriter">
+                                                    افزودن نویسنده <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsewriter5">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().writers.Count > 4)
+                                                {
+                                                    <input type="text" id="txt_writer5" name="writer5" class="form-control Bookman" value="@Model.Books.FirstOrDefault().writers[4].Fname @Model.Books.FirstOrDefault().writers[4].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_writer5" name="writer5" class="form-control Bookman">
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+
+                                        <div class="row"><div class="col-md-4"><p style="margin-right:12px; color:#9A9A9A;">نام مترجم</p></div> </div>
+                                        <div class="col-md-4">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().Translators.Count>0)
+                                                {
+                                                <input type="text" id="txt_translator1" name="translator1" class="form-control Bookman " value="@Model.Books.FirstOrDefault().Translators.FirstOrDefault().Fname @Model.Books.FirstOrDefault().Translators.FirstOrDefault().Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_translator1" name="translator1" class="form-control Bookman ">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" class="collapsetranslator" href="#collapsetranslator2" aria-expanded="false" aria-controls="collapsetranslator2" id="collapsetranslator1">
+                                                    افزودن مترجم <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsetranslator2">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().Translators.Count > 1)
+                                                {
+                                                <input type="text" id="txt_translator2" name="translator2" class="form-control Bookman" value="@Model.Books.FirstOrDefault().Translators[1].Fname @Model.Books.FirstOrDefault().Translators[1].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_translator2" name="translator2" class="form-control Bookman">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" class="collapsetranslator" href="#collapsetranslator3" aria-expanded="false" aria-controls="collapsetranslator3" id="collapsetranslator2">
+                                                    افزودن مترجم <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsetranslator3">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().Translators.Count > 2)
+                                                {
+                                                <input type="text" id="txt_translator3" name="translator3" class="form-control Bookman" value="@Model.Books.FirstOrDefault().Translators[2].Fname @Model.Books.FirstOrDefault().Translators[2].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_translator3" name="translator3" class="form-control Bookman">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" class="collapsetranslator" href="#collapsetranslator4" aria-expanded="false" aria-controls="collapsetranslator4" id="collapsetranslator3">
+                                                    افزودن مترجم <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsetranslator4">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().Translators.Count > 3)
+                                                {
+                                                <input type="text" id="txt_translator4" name="translator4" class="form-control Bookman" value="@Model.Books.FirstOrDefault().Translators[3].Fname @Model.Books.FirstOrDefault().Translators[3].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_translator4" name="translator4" class="form-control Bookman">
+                                                }
+                                            </div>
+                                            <div style="text-align:left">
+                                                <a data-toggle="collapse" class="collapsetranslator" href="#collapsetranslator5" aria-expanded="false" aria-controls="collapsetranslator5" id="collapsetranslator4">
+                                                    افزودن مترجم <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 collapse" id="collapsetranslator5">
+                                            <div class="md-form">
+                                                @if (Model.Books.FirstOrDefault().Translators.Count > 4)
+                                                {
+                                                <input type="text" id="txt_translator5" name="translator5" class="form-control Bookman" value="@Model.Books.FirstOrDefault().Translators[4].Fname @Model.Books.FirstOrDefault().Translators[4].Lname">
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="txt_translator5" name="translator5" class="form-control Bookman">
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="md-form">
+                                                <p style="color:#9A9A9A;">دسته بندی</p>
+                                                <select class="mdb-select requiredInputs" id="select_tags" name="TagsCategory">
+                                                    <option value="" disabled>  دسته بندی</option>
+                                                    @if (Model.Categories!=null)
+                                                    {
+                                                        foreach (var t in Model.Categories)
+                                                        {
+                                                            if (t.ParentID == null)
+                                                            {
+                                                                <optgroup label="@t.TagName">
+                                                                    @foreach (var c in Model.Categories)
+                                                                    {
+                                                                        if (c.ParentID == t.PK_TagID)
+                                                                        {
+                                                                            if (Model.Books.FirstOrDefault().tags[1].PK_TagID == c.PK_TagID)
+                                                                            {
+                                                                                <option value="@c.PK_TagID" selected>@c.TagName</option>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <option value="@c.PK_TagID">@c.TagName</option>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                </optgroup>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="md-form">
+                                                <p style="color:#9A9A9A;">انتشارات</p>
+                                                <input type="text" id="txt_publication" name="publication" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().publication.PublicationName">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="file-field">
+                                                <div class="btn btn-default pull-right">
+                                                    <span>انتخاب عکس کتاب</span>
+                                                    <input type="file" name="bookimage">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path" disabled type="text" placeholder="مسیر عکس را انتخاب کنید">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            @if (Model.Books.FirstOrDefault().image.Path != null && Model.Books.FirstOrDefault().image.Path !="")
+                                            {
+
+                                                <img src="@Model.Books.FirstOrDefault().image.Path" alt="@Model.Books.FirstOrDefault().book.BookTitle" />
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <br />
+
+                                                <div class="md-form">
+                                                    <label style="font-size:medium">خلاصه کتاب </label>
+
+                                                    <textarea style="margin-top:5px" name="Description" class="form-control md-textarea requiredInputs" rows="5" id="Description" placeholder="متن خود را در این قسمت بنویسید!">"@Model.Books.FirstOrDefault().book.Description"</textarea>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">اطلاعات مربوط به فروش</h4>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" id="txt_realPrice" name="realPrice" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().sellinginfos.RealPrice">
+                                                    <label for="txt_realPrice">قیمت روی جلد (تومان)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="md-form">
+                                                    <input type="number" id="txt_yourPrice" name="yourPrice" class="form-control requiredInputs" value="@Model.Books.FirstOrDefault().sellinginfos.SellerPrice">
+                                                    <label for="txt_yourPrice">قیمت فروش (تومان)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <div class="switch ">
+                                                <label>
+                                                    نو
+                                                    <input type="checkbox" name="isNew">
+                                                    <span class="lever"></span>
+                                                    دست دوم
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="switch">
+                                                <label>
+                                                    موجود
+                                                    <input type="checkbox" name="DoExist">
+                                                    <span class="lever"></span>
+                                                    ناموجود
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <br />
+
+                                                <div class="md-form">
+                                                    <label style="font-size:medium">توضیحات </label>
+
+                                                    <textarea style="margin-top:5px" name="SellingDescription" class="form-control md-textarea requiredInputs" rows="8" id="SellingDescription" placeholder="متن خود را در این قسمت بنویسید!">@Model.Books.FirstOrDefault().sellinginfos.Description</textarea>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-lg-center">
+                            <span style="color:indianred; text-align:center;" id="validateError"></span><br /><br />
+                            <button type="submit" id="submitbuttonEditSellerBook" style="width:200px" class="btn btn-default btn-lg btn-fill btn-wd">ذخیره</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+                <!--/.EditSellerBook_panel-->
+
+            </div>
+        </div>
+    </div>
+</div>
+@section appJS{
+<script src="~/Scripts/UpdateSellerBook.js"></script>
+}

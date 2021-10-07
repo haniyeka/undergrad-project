@@ -1,0 +1,51 @@
+D:\Projects\Libreria\my pro\bin\ApplicationInsights.config
+D:\Projects\Libreria\my pro\bin\roslyn\csc.exe
+D:\Projects\Libreria\my pro\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Projects\Libreria\my pro\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Projects\Libreria\my pro\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Projects\Libreria\my pro\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Projects\Libreria\my pro\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Projects\Libreria\my pro\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Projects\Libreria\my pro\bin\roslyn\System.Collections.Immutable.dll
+D:\Projects\Libreria\my pro\bin\roslyn\System.Reflection.Metadata.dll
+D:\Projects\Libreria\my pro\bin\roslyn\vbc.exe
+D:\Projects\Libreria\my pro\bin\roslyn\VBCSCompiler.exe
+D:\Projects\Libreria\my pro\bin\roslyn\VBCSCompiler.exe.config
+D:\Projects\Libreria\my pro\bin\my pro.dll.config
+D:\Projects\Libreria\my pro\bin\my pro.dll
+D:\Projects\Libreria\my pro\bin\my pro.pdb
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.DependencyCollector.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.Web.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.WindowsServer.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.ApplicationInsights.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\Libreria\my pro\bin\System.Web.Helpers.dll
+D:\Projects\Libreria\my pro\bin\System.Web.Mvc.dll
+D:\Projects\Libreria\my pro\bin\System.Web.Razor.dll
+D:\Projects\Libreria\my pro\bin\System.Web.Webpages.Deployment.dll
+D:\Projects\Libreria\my pro\bin\System.Web.Webpages.dll
+D:\Projects\Libreria\my pro\bin\System.Web.Webpages.Razor.dll
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.DependencyCollector.xml
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.Web.xml
+D:\Projects\Libreria\my pro\bin\Microsoft.AI.WindowsServer.xml
+D:\Projects\Libreria\my pro\bin\Microsoft.ApplicationInsights.xml
+D:\Projects\Libreria\my pro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Projects\Libreria\my pro\bin\System.Web.Razor.xml
+D:\Projects\Libreria\my pro\bin\System.Web.Webpages.xml
+D:\Projects\Libreria\my pro\bin\System.Web.Webpages.Deployment.xml
+D:\Projects\Libreria\my pro\bin\System.Web.Webpages.Razor.xml
+D:\Projects\Libreria\my pro\bin\System.Web.Helpers.xml
+D:\Projects\Libreria\my pro\bin\System.Web.Mvc.xml
+D:\Projects\Libreria\my pro\obj\Debug\Libreria.csprojResolveAssemblyReference.cache
+D:\Projects\Libreria\my pro\obj\Debug\my pro.dll
+D:\Projects\Libreria\my pro\obj\Debug\my pro.pdb
+D:\Projects\Libreria\my pro\bin\EntityFramework.dll
+D:\Projects\Libreria\my pro\bin\EntityFramework.SqlServer.dll
+D:\Projects\Libreria\my pro\bin\RayanShafagh.SecurityProvider.dll
+D:\Projects\Libreria\my pro\bin\EntityFramework.xml
+D:\Projects\Libreria\my pro\bin\EntityFramework.SqlServer.xml

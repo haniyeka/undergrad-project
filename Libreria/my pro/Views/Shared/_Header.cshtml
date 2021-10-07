@@ -1,0 +1,63 @@
+﻿@using my_pro.Models;
+@using my_pro.Models.BussinessTypes;
+@model HomePageModel
+<header id="header">
+
+    <h1><a title="بازگشت به صفحه اصلی" href="/Home/Index">فروشگاه اینترنتی کتاب</a></h1>
+    <p> بزرگترین پرتال خرید کتاب به صورت آنلاین از کتاب فروشی ها در ایران </p>
+
+</header><!-- // header -->
+
+@{ Html.RenderPartial("_topMenu",Model);}
+
+<nav class="navbar navbar-dark navbar-fixed-top scrolling-navbar main">
+
+    <!-- Collapse button-->
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
+
+        <i class="fa fa-bars"></i>
+
+    </button>
+
+    <div class="container">
+
+        <!--Collapse content-->
+        <div class="collapse navbar-toggleable-xs" id="collapseEx">
+
+            <!--Links-->
+            <ul class="nav navbar-nav">
+                @foreach ( Tag P in Model.Categories)
+                {
+                    if (P.ParentID == null)
+                    {
+                        long parentid = P.PK_TagID;
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @P.TagName
+                            </a>
+
+                            <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                @foreach (Tag T in Model.Categories)
+                                {
+                                    if (T.ParentID == parentid)
+                                    {
+                                        <a class="dropdown-item" href="/Books/Cat/@T.PK_TagID">@T.TagName</a>
+                                    }
+                                }
+                                <a class="dropdown-item" href="/Books/Cat/@P.PK_TagID">همه</a>
+                            </div>
+
+                        </li>
+                    }
+                }
+            </ul>
+
+            
+        </div>
+        <!--/.Collapse content-->
+
+    </div>
+
+</nav>
+<!--/.Navbar-->

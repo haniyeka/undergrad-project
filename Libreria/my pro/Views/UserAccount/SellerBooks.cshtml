@@ -1,0 +1,133 @@
+﻿@using my_pro.Models
+@model IEnumerable<BookModel>
+
+
+<div class="tab-pane fade" id="mybooks" role="tabpanel">
+    <div class="col-md-12">
+        <div class="header">
+            <h4 class="title">کتاب های من</h4>
+        </div>
+            @if (Model.Count() < 1)
+            {
+                <p style="padding:20px 40px; text-align:center; background-color:rgba(51, 178, 187, 0.2); border:2px solid rgb(51, 178, 187); border-radius: 25px; ">موردی یافت نشد!</p>
+            }
+            else
+            {
+                foreach (var book in Model)
+                {
+                    <article class="card">
+                        <form action="/UserAccount/DeleteSellerBook" method="post">
+                            <input type="hidden" value="@book.book.PK_BookID" name="id" />
+                            <button type="submit" class="close deleteBook" aria-label="Close" data-dismiss="modal">
+                                <span aria-hidden="true" style="font-size:x-large; padding-left:10px; padding-top:10px;">&times;</span>
+
+                            </button>
+                        </form>
+                        <!--Card image-->
+                        <!--/.Card image-->
+                        <!--Card content-->
+                        <div class="card-block">
+                            <div class="row">
+                                <!--Card image-->
+                                <div class="col-md-3">
+                                    <div class="view overlay hm-white-slight">
+
+                                        @if (book.image.Path == null)
+                                        {
+                                            <img src="~/Content/imgs/book-0.jpg"  style="height:200px; width:150px; float:right; display: block; margin: 0 auto;" class="img-fluid" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="@book.image.Path" style="height:200px; width:150px; float:right; display: block; margin: 0 auto;" class="img-fluid" alt="@book.book.BookTitle">
+                                        }
+                                        <a href="/Books/Detail/@book.book.PK_BookID">
+                                            <div class="mask"></div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <!--/.Card image-->
+
+                                <div class="col-md-9">
+                                    <!--Card content-->
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <!--Title-->
+                                            <div class="col-md-9">
+                                                <h3 class="card-title">@book.book.BookTitle</h3>
+                                                @foreach (var w in book.writers)
+                                                {
+                                                    <span>@w.Fname @w.Lname .</span>
+                                                }
+                                            </div>
+                                            <div class="col-md-3">
+                                                @if(book.sellinginfos.Do_Exist == true)
+                                                {
+                                                    <b class="pull-left green-text">
+                                                        موجود
+                                                    </b>
+                                                }
+                                                else
+                                                {
+                                                    <b class="pull-left red-text">
+                                                        ناموجود
+                                                    </b>
+                                                }
+                                            </div>
+                                           
+                                        </div>
+                                        <hr>
+                                        <!--Text-->
+                                            @if (book.book.Description.Length <= 180)
+                                            {
+
+                                                <p class="card-text">
+                                                    @book.book.Description
+                                                    </p>
+                                            }
+                                            else
+                                            {
+
+                                                <p class="card-text">
+                                                    @book.book.Description.Substring(0, 180)
+                                                </p>
+                                            }
+                                                
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                @if (book.sellinginfos.SellerPrice != 0 &&  book.sellinginfos.SellerPrice != book.sellinginfos.RealPrice)
+                                                {
+                                                    <span>قیمت :
+                                                        <del class="discount">@book.sellinginfos.RealPrice تومان </del>
+
+                                                        <br />
+                                                        <span class="red-text" style="margin-right:35px"><b>@book.sellinginfos.SellerPrice تومان </b> </span>
+                                                    </span>
+                                                            }
+                                                            else
+                                                            {
+                                                                    <span><b>@book.sellinginfos.RealPrice تومان </b> </span>
+                                                                    
+                                                            }
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="text-xs-center">
+
+                                                    <a class="btn btn-primary" href="/UserAccount/UpdateSellerBook/@book.book.PK_BookID">ویرایش</a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.Card content-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Card content-->
+
+                    </article>
+                }
+            }
+    </div>
+
+</div>

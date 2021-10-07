@@ -1,0 +1,633 @@
+﻿@using my_pro.Models.BussinessTypes
+@model HomePageModel
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section meta{
+<link href="~/Content/css/profile.css" rel="stylesheet" />
+    }
+<hr />
+        <div class="container" style="padding-top:50px;padding-bottom:30px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs md-pills" id="userTabs" role="tablist" style="width:150px; ">
+
+                        <li class="nav-item" > 
+                            <a class="nav-pills active" data-toggle="tab" href="#userinfo" role="tab">
+                                 <i class="fa fa-user"></i> تکمیل اطلاعات کاربری
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-pills" data-toggle="tab" href="#favorites" role="tab">
+                                <i class="fa fa-heart"></i> علاقه مندی ها
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-pills" data-toggle="tab" href="#profile" role="tab">
+                                <i class="fa fa-shopping-basket"></i> سفارشات من 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-pills" data-toggle="tab" href="#commentpanel" role="tab">
+                                <i class="fa fa-comment"></i> نظرات من
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-pills" data-toggle="tab" href="#changepassword" role="tab">
+                                <i class="fa fa-edit"></i> تغییر رمز عبور
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-pills" data-toggle="tab" href="#profile" role="tab">
+                                <i class="fa fa-eject"></i> خروج
+                            </a>
+                            </li>
+                    </ul>
+                    <br />
+                </div>
+                <div class="col-md-9">
+                    <!-- Tab panels -->
+                    <div class="tab-content vertical">
+                        <!--user_info_panel-->
+                        <div class="tab-pane fade active in" id="userinfo" role="tabpanel">
+                            <div class="col-md-7">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">ویرایش اطلاعات کاربری</h4>
+                                    </div>
+                                    <div class="content">
+                                        <form method="post" action="/UserAccount/UpdateProfile" class="Form" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_Fname" name="Fname" class="form-control requiredInputs" value="@Model.User.Fname">
+                                                            <label for="txt_Fname">نام </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_Lname" name="Lname" class="form-control requiredInputs" value="@Model.User.Lname">
+                                                            <label for="txt_Lname"> نام خانوادگی </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+
+                                                        <div class="md-form">
+                                                            <select class="mdb-select" id="txt_Gender" name="Gender">
+                                                                <option value="" disabled>  جنسیت</option>
+                                                                @if (Model.User.Gender != null)
+                                                                {
+                                                                    if (Model.User.Gender == "F")
+                                                                    {
+                                                                        <option value="M"> مرد </option>
+                                                                        <option value="F" selected> زن</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="M" selected> مرد </option>
+                                                                        <option value="F"> زن</option>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="M"> مرد </option>
+                                                                    <option value="F"> زن</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_EmailAddress" name="EmailAddress" class="form-control requiredInputs" disabled value="@Model.User.EmailAddress">
+                                                            <label for="txt_EmailAddress"> آدرس پست الکترونیکی </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_birthdate" name="Birthdate" class="form-control" value="@Model.User.Birthdate">
+                                                            <label for="txt_birthdate"> تاریخ تولد </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="file-field">
+                                                        <div class="btn btn-default pull-right">
+                                                            <span>عکس پروفایل</span>
+                                                            <input type="file" name="Image">
+                                                        </div>
+                                                        <div class="file-path-wrapper">
+                                                            <input class="file-path" disabled type="text" placeholder="مسیر عکس را انتخاب کنید">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_Address" name="Address" class="form-control requiredInputs" value="@Model.User.Address">
+                                                            <label for="txt_Address"> آدرس </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_Province" name="Province" class="form-control" value="@Model.User.Province">
+                                                            <label for="txt_Province"> استان </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="text" id="txt_City" name="City" class="form-control" value="@Model.User.City">
+                                                            <label for="txt_City"> شهرستان </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="md-form">
+                                                            <input type="number" id="txt_PostalCode" name="PostalCode" class="form-control" value="@Model.User.PostalCode">
+                                                            <label for="txt_PostalCode"> کدپستی </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <br />
+
+                                                        <div class="md-form">
+                                                            <label style="font-size:medium">درباره من </label>
+                                                            <textarea style="margin-top:5px" name="Description" class="form-control md-textarea" rows="5" id="Description" placeholder="متن خود را در این قسمت بنویسید!">@Model.User.Description</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-info btn-fill btn-wd submiteditprofile">ویرایش اطلاعات</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="card card-user">
+                                    <div class="image">
+                                        <img src="~/Content/AdminPanelStyles/img/background.jpg" alt="..." />
+                                    </div>
+                                    <div class="content">
+                                        <div class="author">
+                                            @if (Model.User.Image != null)
+                                            {
+                                                <img class="avatar border-white" alt="..." src="@Model.User.Image" />
+                                            }
+                                            else
+                                            {
+                                                if (Model.User.Gender == "F")
+                                                {
+                                                    <img class="avatar border-white" alt="..." src="~/Content/AdminPanelStyles/img/faces/face-0.jpg" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="avatar border-white" alt="..." src="~/Content/AdminPanelStyles/img/faces/face-1.jpg" />
+                                                }
+                                            }
+                                            <h4 class="title">
+                                                @Model.User.Fname @Model.User.Lname<br />
+                                                <a href="#"><small>@@@Model.User.Username</small></a>
+                                            </h4>
+                                        </div>
+                                        <p class="description text-center">
+                                            @Model.User.Description
+
+
+
+                                        </p>
+
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <div class="row" style="text-align:center">
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <h5>@Model.User.Invoices.Count()<br /><small>کتاب</small></h5>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>@Model.User.Comments.Count()<br /><small>نظردهی</small></h5>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5>@Model.User.favorites.Count()<br /><small>علاقه مندی</small></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.user_info_panel-->
+                        <!--FavoriteBooks_panel-->
+                        <div class="tab-pane fade" id="favorites" role="tabpanel">
+                            @if (Model.User.favorites.Count() < 1)
+                            {
+                                <p style="padding:20px 40px; text-align:center; background-color:rgba(51, 178, 187, 0.2); border:2px solid rgb(51, 178, 187); border-radius: 25px; ">موردی یافت نشد!</p>
+                            }
+                            else
+                            {
+                                foreach (var fav in Model.User.favorites)
+                                {
+                                <div class="col-md-4">
+
+                                    <article class="card">
+                                        <form action="/UserAccount/DeleteFavorite" method="post">
+                                            <input type="hidden" value="@fav.book.PK_BookID"  name="favoriteID"/>
+                                            <input type="hidden" value="@Model.User.Pk_memberID" name="UserID"/>
+                                        <button type="submit" class="close deletefav" aria-label="Close" data-dismiss="modal" >
+                                            <span aria-hidden="true" style="font-size:x-large; padding-left:10px; padding-top:10px;">&times;</span>
+
+                                        </button>
+                                            </form>
+                                        <!--Card image-->
+                                        <div class="view overlay hm-white-slight">
+
+                                        @if (fav.image == null) 
+                                        {
+                                        <img src="~/Content/imgs/book-0.jpg" class="img-fluid" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="@fav.image.Path" style="height:130px;display: block; margin: 0 auto;" class="img-fluid" alt="@fav.book.BookTitle">
+                                        }
+                                        <a href="/Books/Detail/@fav.book.PK_BookID">
+                                            <div class="mask"></div>
+                                        </a>
+
+                                        </div>
+                                        <!--/.Card image-->
+                                        <!--Percent-->
+                                        <div class="card-share">
+                                            
+                                            @*<span class="btn-floating btn-action share-toggle warning-color-dark">35<i>%</i></span>*@
+
+                                        </div>
+                                        <!--/Percent-->
+                                        <!--Card content-->
+                                        <div class="card-block">
+
+                                        <!--Title-->
+                                        <h3 class="card-title">@fav.book.BookTitle</h3>
+
+                                        <hr>
+
+                                        <!--Text-->
+                                        <p class="card-text">
+                                            @fav.book.Description.Substring(0, 100)
+                                        </p>
+
+                                        <div class="text-xs-center">
+
+                                            <a class="btn btn-primary" href="/Books/Detail/@fav.book.PK_BookID">مشاهده</a>
+
+                                        </div>
+
+                                    </div>
+                                        <!--/.Card content-->
+
+                                </article>
+
+                                </div>
+                                }
+                            }
+                        </div>
+                        <!--/.FavoriteBooks_panel-->
+                        <!--comments_panel-->
+                        <div class="tab-pane fade" id="commentpanel" role="tabpanel">
+                            @if (Model.User.Comments.Count() < 1)
+                            {
+                                <p style="padding:20px 40px; text-align:center; background-color:rgba(51, 178, 187, 0.2); border:2px solid rgb(51, 178, 187); border-radius: 25px; ">موردی یافت نشد!</p>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    @foreach (var c in Model.User.Comments)
+                                    {
+
+                                    <div class="col-md-6">
+
+                                        <div class="card text-center z-depth-2" style="background-color:rgba(51, 178, 187, 0.2)">
+                                            <div class="card-block">
+                                                <h5><b><a href="/Books/Detail/@c.book.book.PK_BookID">@c.book.book.BookTitle</a></b> </h5>
+                                                <form method="post" action="/UserAccount/RemoveComment/" >
+                                                    <input type="hidden" name="commentID" value="@c.Pk_CommentID" />
+                                                    <input type="hidden" name="bookID" value="@c.book.book.PK_BookID" />
+                                                    <button type="submit" class="close text-danger" data-toggle="tooltip" data-placement="top" title="حذف نظر"><i class="fa fa-times"></i></button>
+                                                </form>
+                                                <small><i class="fa fa-clock-o"></i> @c.Date.ToShortDateString()</small>
+                                                <p style="color:#33b2bb">@c.Comment1</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <!--/.comments_panel-->
+
+                        <!--transactions_panel-->
+                        <div class="tab-pane fade" id="transactions" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>
+                                        تاریخچه خرید و استرداد
+                                    </h2>
+                                </div>
+                                <div class="card-block">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>ردیف</th>
+                                                <th>کد</th>
+                                                <th>تاریخ</th>
+                                                <th>وضعیت</th>
+                                                <th>امکانات</th>
+                                                <th>جزییات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr data-id="7101" class="table-success">
+                                                <th scope="row">1</th>
+                                                <td>7101</td>
+                                                <td>
+                                                    29/08/2016
+                                                </td>
+                                                <td>
+                                                    رزرو شده
+                                                </td>
+                                                <td>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="مشاهده جزییات"><i class="fa fa-eye fa-lg"></i></a>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="چاپ"><i class="fa fa-print fa-lg"></i></a>
+                                                </td>
+                                                <td>
+                                                    <button data-id="1" type="button" class="btn btn-sm btn-blue-grey transactionbtn" data-toggle="collapse" data-target="#collapse_transaction_1" aria-expanded="false" aria-controls="collapse_transaction_1">
+                                                        <i class="fa fa-chevron-down"></i> مشاهده جزییات
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="collapse" id="collapse_transaction_1">
+                                                <td colspan="6">
+                                                    <table class="table">
+                                                        <thead class="thead-default">
+                                                            <tr>
+                                                                <th>نام</th>
+                                                                <th>%</th>
+                                                                <th>قیمت واحد</th>
+                                                                <th>درصد تخفیف</th>
+                                                                <th>مبلغ</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="body_1">
+                                                            <tr class="default">
+                                                                <td id="name_1"> </td>
+                                                                <td id="percent_1"></td>
+                                                                <td id="paid_1"></td>
+                                                                <td id="percentPercent_1"></td>
+                                                                <td id="price_1"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                            <tr data-id="7134" class="table-success">
+                                                <th scope="row">2</th>
+                                                <td>7134</td>
+                                                <td>
+                                                    31/08/2016
+                                                </td>
+                                                <td>
+                                                    منقضی شده
+                                                </td>
+                                                <td>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="مشاهده جزییات"><i class="fa fa-eye fa-lg"></i></a>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="چاپ"><i class="fa fa-print fa-lg"></i></a>
+                                                </td>
+                                                <td>
+                                                    <button data-id="2" type="button" class="btn btn-sm btn-blue-grey transactionbtn" data-toggle="collapse" data-target="#collapse_transaction_2" aria-expanded="false" aria-controls="collapse_transaction_2">
+                                                        <i class="fa fa-chevron-down"></i> مشاهده جزییات
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="collapse" id="collapse_transaction_2">
+                                                <td colspan="6">
+                                                    <table class="table">
+                                                        <thead class="thead-default">
+                                                            <tr>
+                                                                <th>نام</th>
+                                                                <th>%</th>
+                                                                <th>قیمت واحد</th>
+                                                                <th>درصد تخفیف</th>
+                                                                <th>مبلغ</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="body_2">
+                                                            <tr class="default">
+                                                                <td id="name_2"> </td>
+                                                                <td id="percent_2"></td>
+                                                                <td id="paid_2"></td>
+                                                                <td id="percentPercent_2"></td>
+                                                                <td id="price_2"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                            <tr data-id="7176" class="table-success">
+                                                <th scope="row">3</th>
+                                                <td>7176</td>
+                                                <td>
+                                                    10/09/2016
+                                                </td>
+                                                <td>
+                                                    منقضی شده
+                                                </td>
+                                                <td>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="مشاهده جزییات"><i class="fa fa-eye fa-lg"></i></a>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="چاپ"><i class="fa fa-print fa-lg"></i></a>
+                                                </td>
+                                                <td>
+                                                    <button data-id="3" type="button" class="btn btn-sm btn-blue-grey transactionbtn" data-toggle="collapse" data-target="#collapse_transaction_3" aria-expanded="false" aria-controls="collapse_transaction_3">
+                                                        <i class="fa fa-chevron-down"></i> مشاهده جزییات
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="collapse" id="collapse_transaction_3">
+                                                <td colspan="6">
+                                                    <table class="table">
+                                                        <thead class="thead-default">
+                                                            <tr>
+                                                                <th>نام</th>
+                                                                <th>%</th>
+                                                                <th>قیمت واحد</th>
+                                                                <th>درصد تخفیف</th>
+                                                                <th>مبلغ</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="body_3">
+                                                            <tr class="default">
+                                                                <td id="name_3"> </td>
+                                                                <td id="percent_3"></td>
+                                                                <td id="paid_3"></td>
+                                                                <td id="percentPercent_3"></td>
+                                                                <td id="price_3"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                            <tr data-id="7176" class="table-success">
+                                                <th scope="row">4</th>
+                                                <td>7176</td>
+                                                <td>
+                                                    10/09/2016
+                                                </td>
+                                                <td>
+                                                    منقضی شده
+                                                </td>
+                                                <td>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="مشاهده جزییات"><i class="fa fa-eye fa-lg"></i></a>
+                                                    <a class="grey-text" data-toggle="tooltip" data-placement="top" title="چاپ"><i class="fa fa-print fa-lg"></i></a>
+                                                </td>
+                                                <td>
+                                                    <button data-id="4" type="button" class="btn btn-sm btn-blue-grey transactionbtn" data-toggle="collapse" data-target="#collapse_transaction_4" aria-expanded="false" aria-controls="collapse_transaction_4">
+                                                        <i class="fa fa-chevron-down"></i> مشاهده جزییات
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="collapse" id="collapse_transaction_4">
+                                                <td colspan="6">
+                                                    <table class="table">
+                                                        <thead class="thead-default">
+                                                            <tr>
+                                                                <th>نام</th>
+                                                                <th>%</th>
+                                                                <th>قیمت واحد</th>
+                                                                <th>درصد تخفیف</th>
+                                                                <th>مبلغ</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="body_4">
+                                                            <tr class="default">
+                                                                <td id="name_4"> </td>
+                                                                <td id="percent_4"></td>
+                                                                <td id="paid_4"></td>
+                                                                <td id="percentPercent_4"></td>
+                                                                <td id="price_4"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.transactions_panel-->
+                        <!--profile_panel-->
+
+                        <div class="user-info tab-pane fade" id="profile" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>
+                                        اطلاعات کاربر
+                                    </h2>
+                                </div>
+                                <div class="card-block">
+
+                                    <div class="row user-info-table">
+                                        <div class="col-lg-2 col-md-3 col-sm-3">نام و نام خانوادگی:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">آزاده نامداری</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">پست الکترونیک:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">elham.safakhou@gmail.com</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">کد ملی:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3"></div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">شماره تلفن ثابت:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3"></div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">شماره تلفن همراه:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3"></div>
+
+                                        <div class="col-lg-2 col-md-3 col-sm-3">جنسیت:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3"></div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">محل سکونت:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3"></div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">دریافت خبرنامه:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">بله</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">شماره کارت:</div>
+                                        <div class="col-lg-2 col-md-3 col-sm-3">--</div>
+                                    </div>
+                                    <a class="btn btn-warning " href="/user/getprofile">ویرایش اطلاعات</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--/.profile_panel-->
+                        <!--payment_history-->
+                        <!--/.payment_history-->
+                    </div>
+                </div>
+            </div>
+        </div>
+@section appJS{
+<script src="~/Scripts/UserProfile.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        $('#deletefav').click(function () {
+            var favid = $(this).prop('id');
+            var memberid = @Model.User.Pk_memberID;
+            $(function () {
+                $.ajax({
+                    url: "UserAccount/DeleteFavorites/",
+                    type: "POST",
+                    data: { favid, memberid},
+                    success: (function (data) {
+                        if (data == false) {
+                            $(window).reload();;
+                        }
+                        else {
+                        }
+
+                    }),
+                    error: (function (xhr) {
+
+                    }),
+                });
+            });
+        });
+    </script>
+    }

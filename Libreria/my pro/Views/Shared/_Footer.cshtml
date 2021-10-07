@@ -1,0 +1,134 @@
+﻿@using my_pro.Models;
+@using my_pro.Models.BussinessTypes;
+@model HomePageModel
+<!--Footer-->
+<footer class="page-footer center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container">
+
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-md-2">
+
+                <ul >
+                    <li>
+                        <h5 class="title">بوکنت</h5>
+                    </li>
+                    <li>
+
+                        <a  class="dropdown-item" href="#!">معرفی بوکنت</a>
+
+                    </li>
+
+                    <li>
+
+                        <a  class="dropdown-item" href="#!">پیشنهادات ویژه</a>
+
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="#!">پیگیری خرید</a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a class="dropdown-item" href="#!">ارتباط با بوکنت</a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+            <!--/.First column-->
+
+
+            <!--Second column-->
+
+            @foreach (Tag P in Model.Categories)
+            {
+                if (P.ParentID == null)
+                {
+                    long parentid = P.PK_TagID;
+                    <div class="col-md-2">
+
+                    <ul>
+                        
+                        
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="collapse" data-target="#@P.PK_TagID">
+                                @P.TagName
+                            </a>
+                            <div id="@P.PK_TagID" class="collapse in">
+                                @foreach (Tag T in Model.Categories)
+                                {
+                                    if (T.ParentID == parentid)
+                                    {
+                                        <a class="dropdown-item" href="/Books/Cat/@T.PK_TagID">@T.TagName</a>
+                                    }
+                                }
+                                <a class="dropdown-item" href="/Books/Cat/@P.PK_TagID">همه</a>
+                            </div>
+
+                        </li>
+                       
+                    </ul>
+
+                </div>
+                }
+            }
+        </div>
+
+    </div>
+    <!--/.Footer Links-->
+
+    <hr>
+
+    <!--Call to action-->
+    <div class="call-to-action">
+
+        <ul>
+
+            <li>
+
+                <h5>ثبت نام رایگان</h5>
+
+            </li>
+
+            <li>
+
+                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-register">ثبت نام!</a>
+
+            </li>
+
+        </ul>
+
+        <p>آدرس: خيابان افريقا نرسيده به چهارراه جهان كودك؛كوچه ژوبين پلاك ١٠</p>
+
+        <p>شماره تماس: <span dir="ltr"> 021 22651060 </span></p>
+
+    </div>
+    <!--/.Call to action-->
+
+    <hr>
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+
+        <div class="container-fluid">
+
+            © 2016 Copyright: <a href="http://www.booknet.com"> booknet.com </a>
+
+        </div>
+
+    </div>
+    <!--/.Copyright-->
+
+</footer>
+<!--/.Footer-->

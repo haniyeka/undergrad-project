@@ -1,0 +1,111 @@
+﻿
+<section class="container search-box">
+
+    <h2 class="hiddendiv">جستجو</h2>
+
+    <div class="row" id="home">
+
+        <div class="col-lg-12">
+
+            <div class="card wow fadeInRight">
+
+                <div class="card-block">
+                    <!-- Live preview-->
+                    <!-- Nav tabs -->
+
+                    <!-- Tab panels -->
+                    <div class="tab-content">
+
+                        <!--Panel-->
+                        <div class="tab-pane fade in active" id="Bookpanel" role="tabpanel">
+
+                            <br>
+
+                            <form method="post" action="/Books/Search" class="Form" id="booksearch">
+
+                                <div class="row">
+
+                                    <div class="col-md-9">
+
+                                        <div class="md-form">
+
+                                            <input type="text" id="txt_search" name="SearchKeyword" class="form-control requiredInputs">
+
+                                            <label for="txt_search"> <i class="fa fa-search"></i> عنوان کتاب ، نام مولف ، نام مترجم و یا نام انتشارات کتاب را برای جست و جو وارد نمایید ...</label>
+
+                                        </div>
+
+                                    </div>
+
+                                    <button id="searchbook" type="submit" class="btn btn-lg btn-primary submitbutton"> جستجو </button>
+                                </div>
+                            </form>
+                                <p>
+
+                                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="advanceSearch">
+                                        جستجوی پیشرفته <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                                    </a>
+
+                                </p>
+
+                                <div class="collapse" id="collapseExample">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12 form-inline m-b-r">
+                                            <form method="post" action="/Books/AdvanceSearch" class="Form" >
+                                                <fieldset class="form-group">
+                                                    <div class="md-form">
+                                                        <input type="text" id="txt_title" name="title" class="form-control requiredInputs">
+
+                                                        <label for="txt_title">عنوان کتاب</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <div class="md-form">
+                                                        <input type="text" id="txt_writer" name="writer" class="form-control requiredInputs">
+
+                                                        <label for="txt_writer">مولف</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <div class="md-form">
+                                                        <input type="text" id="txt_translator" name="translator" class="form-control requiredInputs">
+
+                                                        <label for="txt_translator">مترجم</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <div class="md-form">
+                                                        <input type="text" id="txt_publisher" name="publisher" class="form-control requiredInputs">
+
+                                                        <label for="txt_publisher">انتشارات</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <button id="advancesearchbook" type="submit" class="btn btn-lg btn-primary submitbutton"> جستجو </button>
+                                                </fieldset>
+
+                                            </form>
+</div>
+
+                                </div>
+                                    </div>
+                                <!--Body-->
+                           
+
+
+                        </div>
+                        <!--/.Panel-->
+                    </div>
+                    <!-- /.Live preview-->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

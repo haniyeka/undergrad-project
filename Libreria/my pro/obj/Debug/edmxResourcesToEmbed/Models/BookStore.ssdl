@@ -1,0 +1,875 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onlinebookstoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="PK_AddressID" />
+    </Key>
+    <Property Name="PK_AddressID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressLine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostalCode" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="FK_ProvinceID" Type="bigint" />
+    <Property Name="FK_CityID" Type="bigint" />
+    <Property Name="FK_CountryID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'onlinebookstore.dbo.Admins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="Pk_ID" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="PasswordHash" />
+      <PropertyRef Name="PasswordSalt" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="Pk_ID" Type="bigint" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordHash" Type="varbinary(max)" Nullable="false" />
+    <Property Name="PasswordSalt" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Description" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="PK_BookID" />
+    </Key>
+    <Property Name="PK_BookID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Publicationyear" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="PrintNumber" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Numberof" Type="bigint" Nullable="false" />
+    <Property Name="edition" Type="int" Nullable="false" />
+    <Property Name="FK_PublicationID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookImage">
+    <Key>
+      <PropertyRef Name="PK_BookImageID" />
+    </Key>
+    <Property Name="PK_BookImageID" Type="bigint" Nullable="false" />
+    <Property Name="FK_BookID" Type="bigint" Nullable="false" />
+    <Property Name="FK_ImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookMans">
+    <Key>
+      <PropertyRef Name="PK_BookMansID" />
+    </Key>
+    <Property Name="FK_PersonID" Type="bigint" Nullable="false" />
+    <Property Name="PK_BookMansID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Worksince" Type="date" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookMansProfession">
+    <Key>
+      <PropertyRef Name="PK_BookMansProfessionID" />
+    </Key>
+    <Property Name="PK_BookMansProfessionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_BookMansID" Type="bigint" Nullable="false" />
+    <Property Name="FK_ProfessionTypeID" Type="bigint" Nullable="false" />
+    <Property Name="Since" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookTag">
+    <Key>
+      <PropertyRef Name="PK_BookTagID" />
+    </Key>
+    <Property Name="PK_BookTagID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_TagID" Type="bigint" Nullable="false" />
+    <Property Name="FK_BookID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookType">
+    <Key>
+      <PropertyRef Name="PK_BookTypeID" />
+    </Key>
+    <Property Name="PK_BookTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_BookID" Type="bigint" Nullable="false" />
+    <Property Name="FK_TypeID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="PK_CityID" />
+    </Key>
+    <Property Name="PK_CityID" Type="bigint" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="PK_CountyID" />
+    </Key>
+    <Property Name="PK_CountyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Domain">
+    <Key>
+      <PropertyRef Name="PK_DomainID" />
+    </Key>
+    <Property Name="PK_DomainID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DomainName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="PK_ImageID" />
+    </Key>
+    <Property Name="PK_ImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TemporaryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Uploaddate" Type="datetime" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="PK_MemberID" />
+    </Key>
+    <Property Name="PK_MemberID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_PersonID" Type="bigint" Nullable="false" />
+    <Property Name="JoinDate" Type="datetime" Nullable="false" />
+    <Property Name="PassSalt" Type="varbinary(max)" Nullable="false" />
+    <Property Name="PassHash" Type="varbinary(max)" Nullable="false" />
+    <Property Name="FK_MemberTypeID" Type="bigint" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MemberType">
+    <Key>
+      <PropertyRef Name="PK_MemberTypeID" />
+    </Key>
+    <Property Name="PK_MemberTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PK_PersonID" />
+    </Key>
+    <Property Name="Fname" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="Lname" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="FK_UserID" Type="bigint" Nullable="false" />
+    <Property Name="FK_DomainID" Type="bigint" Nullable="false" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="FK_ImageID" Type="bigint" />
+    <Property Name="FK_AddressID" Type="bigint" />
+    <Property Name="PK_PersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSearchTag">
+    <Key>
+      <PropertyRef Name="PK_PersonSerachTag" />
+    </Key>
+    <Property Name="PK_PersonSerachTag" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_TagID" Type="bigint" Nullable="false" />
+    <Property Name="FK_MemberID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="PK_PhoneID" />
+    </Key>
+    <Property Name="PK_PhoneID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_PhoneTypeID" Type="bigint" Nullable="false" />
+    <Property Name="FK_PersonID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="PK_PhoneTypeID" />
+    </Key>
+    <Property Name="PK_PhoneTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhoneTypeName" Type="varbinary" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfessionType">
+    <Key>
+      <PropertyRef Name="PK_ProfessionTypeID" />
+    </Key>
+    <Property Name="PK_ProfessionTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfrssionTypeName" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="PK_ProvinceID" />
+    </Key>
+    <Property Name="PK_ProvinceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Publication">
+    <Key>
+      <PropertyRef Name="PK_PublicationID" />
+    </Key>
+    <Property Name="PK_PublicationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PublicationName" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="PK_TagID" />
+    </Key>
+    <Property Name="PK_TagID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TagName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParentID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="PK_TypeID" />
+    </Key>
+    <Property Name="PK_TypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="PK_UserID" />
+    </Key>
+    <Property Name="PK_UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Address_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="PK_CityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="PK_CountyID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Province">
+    <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="PK_ProvinceID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FK_ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Publication">
+    <End Role="Publication" Type="Self.Publication" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publication">
+        <PropertyRef Name="PK_PublicationID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="FK_PublicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookImage_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookImage" Type="Self.BookImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookImage">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookImage_Image">
+    <End Role="Image" Type="Self.Image" Multiplicity="1" />
+    <End Role="BookImage" Type="Self.BookImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="PK_ImageID" />
+      </Principal>
+      <Dependent Role="BookImage">
+        <PropertyRef Name="FK_ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMans_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="BookMans" Type="Self.BookMans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="BookMans">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMansProfession_BookMans">
+    <End Role="BookMans" Type="Self.BookMans" Multiplicity="1" />
+    <End Role="BookMansProfession" Type="Self.BookMansProfession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookMans">
+        <PropertyRef Name="PK_BookMansID" />
+      </Principal>
+      <Dependent Role="BookMansProfession">
+        <PropertyRef Name="FK_BookMansID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookMansProfession_ProfessionType">
+    <End Role="ProfessionType" Type="Self.ProfessionType" Multiplicity="1" />
+    <End Role="BookMansProfession" Type="Self.BookMansProfession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfessionType">
+        <PropertyRef Name="PK_ProfessionTypeID" />
+      </Principal>
+      <Dependent Role="BookMansProfession">
+        <PropertyRef Name="FK_ProfessionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookTage_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookTag" Type="Self.BookTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookTag">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookTage_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+    <End Role="BookTag" Type="Self.BookTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="PK_TagID" />
+      </Principal>
+      <Dependent Role="BookTag">
+        <PropertyRef Name="FK_TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookType_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookType" Type="Self.BookType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="PK_BookID" />
+      </Principal>
+      <Dependent Role="BookType">
+        <PropertyRef Name="FK_BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookType_Type">
+    <End Role="Types" Type="Self.Types" Multiplicity="1" />
+    <End Role="BookType" Type="Self.BookType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="PK_TypeID" />
+      </Principal>
+      <Dependent Role="BookType">
+        <PropertyRef Name="FK_TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_MemberType">
+    <End Role="MemberType" Type="Self.MemberType" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberType">
+        <PropertyRef Name="PK_MemberTypeID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="FK_MemberTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="PK_AddressID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Domain">
+    <End Role="Domain" Type="Self.Domain" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Domain">
+        <PropertyRef Name="PK_DomainID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_DomainID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Image">
+    <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="PK_ImageID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="PK_UserID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="FK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSearchTag_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="PersonSearchTag" Type="Self.PersonSearchTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="PK_MemberID" />
+      </Principal>
+      <Dependent Role="PersonSearchTag">
+        <PropertyRef Name="FK_MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSearchTag_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+    <End Role="PersonSearchTag" Type="Self.PersonSearchTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="PK_TagID" />
+      </Principal>
+      <Dependent Role="PersonSearchTag">
+        <PropertyRef Name="FK_TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PK_PersonID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="FK_PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_PhoneType">
+    <End Role="PhoneType" Type="Self.PhoneType" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="PK_PhoneTypeID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="FK_PhoneTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User1" Type="Self.User" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="PK_UserID" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="PK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_AddAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Aline" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pocode" Type="char" Mode="In" />
+    <Parameter Name="CName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Country" Type="nvarchar" Mode="In" />
+    <Parameter Name="PName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BTitle" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Pyear" Type="nvarchar" Mode="In" />
+    <Parameter Name="PNumber" Type="int" Mode="In" />
+    <Parameter Name="Descript" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Number" Type="bigint" Mode="In" />
+    <Parameter Name="edition" Type="int" Mode="In" />
+    <Parameter Name="pname" Type="nvarchar" Mode="In" />
+    <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_AddBookImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BTitle" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Path" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddBookMans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="WSince" Type="date" Mode="In" />
+    <Parameter Name="descript" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_AddBookMansProfession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Since" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_AddBookTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BTitle" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TagName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddBookType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tname" Type="nvarchar" Mode="In" />
+    <Parameter Name="BTitle" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_AddCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Coname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddDomain" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Dname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UpDate" Type="datetime" Mode="In" />
+    <Parameter Name="PathAddress" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fname" Type="nvarchar" Mode="In" />
+    <Parameter Name="lname" Type="nvarchar" Mode="In" />
+    <Parameter Name="BirthDate" Type="datetime" Mode="In" />
+    <Parameter Name="Gender" Type="char" Mode="In" />
+    <Parameter Name="postalCode" Type="char" Mode="In" />
+    <Parameter Name="Path" Type="nvarchar" Mode="In" />
+    <Parameter Name="UID" Type="nvarchar" Mode="In" />
+    <Parameter Name="DID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddPhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PNumber" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddPhoneType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PTName" Type="varbinary" Mode="In" />
+  </Function>
+  <Function Name="sp_AddProfessionType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PTypeName" Type="varbinary" Mode="In" />
+    <Parameter Name="Des" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_AddProvince" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Addpublicatio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pname" Type="nvarchar" Mode="In" />
+    <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_AddTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TName" Type="nvarchar" Mode="In" />
+    <Parameter Name="PId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_AddTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UsName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_deletbook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletbookImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookImageID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletbookMans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookMansID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletbookMansProfession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookMansProfessionID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletbookTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookTagID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletbookType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookTypeID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CityID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CountyID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteDomain" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DomainID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ImageID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MemberID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteMemberTypeID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MemberTypeID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletePerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletePersonSearchTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonSerachTag" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletePhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PhoneID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteProfessionType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProfessionTypeID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteProvince" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProvinceID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deletePublicationID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PublicationID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TagID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TypeID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_deleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USerID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AddressLine" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="postalcode" Type="char" Mode="In" />
+    <Parameter Name="AddressID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BookTitle" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="publicationyear" Type="nvarchar" Mode="In" />
+    <Parameter Name="PrintNumber" Type="int" Mode="In" />
+    <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="numberof" Type="bigint" Mode="In" />
+    <Parameter Name="edition" Type="int" Mode="In" />
+    <Parameter Name="BookID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateBookMans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Worksince" Type="date" Mode="In" />
+    <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PersonID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CityName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CityID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CountryName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CountryID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateDomain" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DomainName" Type="nvarchar" Mode="In" />
+    <Parameter Name="DomainID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TemporaryName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Uploaddate" Type="datetime" Mode="In" />
+    <Parameter Name="Path" Type="nvarchar" Mode="In" />
+    <Parameter Name="ImageID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PassSalt" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="JoinDate" Type="datetime" Mode="In" />
+    <Parameter Name="Pathhash" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="MemberID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdatePerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="birthDate" Type="datetime" Mode="In" />
+    <Parameter Name="Gender" Type="char" Mode="In" />
+    <Parameter Name="PersonID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdatePhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="PhoneID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateProfessionType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProfessionTypeName" Type="nchar" Mode="In" />
+    <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProfessionTypeID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateProvince" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProvinceName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProvinceID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdatePulcati" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PublicationName" Type="nchar" Mode="In" />
+    <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PublicationID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TypeName" Type="nvarchar" Mode="In" />
+    <Parameter Name="TypeID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserID" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="onlinebookstoreModelStoreContainer">
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookImage" EntityType="Self.BookImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookMans" EntityType="Self.BookMans" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookMansProfession" EntityType="Self.BookMansProfession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookTag" EntityType="Self.BookTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookType" EntityType="Self.BookType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Domain" EntityType="Self.Domain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberType" EntityType="Self.MemberType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonSearchTag" EntityType="Self.PersonSearchTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhoneType" EntityType="Self.PhoneType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfessionType" EntityType="Self.ProfessionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Publication" EntityType="Self.Publication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admins" EntityType="Self.Admins" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Admins].[Pk_ID] AS [Pk_ID], 
+    [Admins].[Username] AS [Username], 
+    [Admins].[PasswordHash] AS [PasswordHash], 
+    [Admins].[PasswordSalt] AS [PasswordSalt], 
+    [Admins].[Description] AS [Description]
+    FROM [dbo].[Admins] AS [Admins]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Province" Association="Self.FK_Address_Province">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Publication" Association="Self.FK_Book_Publication">
+      <End Role="Publication" EntitySet="Publication" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookImage_Book" Association="Self.FK_BookImage_Book">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="BookImage" EntitySet="BookImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookImage_Image" Association="Self.FK_BookImage_Image">
+      <End Role="Image" EntitySet="Image" />
+      <End Role="BookImage" EntitySet="BookImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMans_Person" Association="Self.FK_BookMans_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="BookMans" EntitySet="BookMans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMansProfession_BookMans" Association="Self.FK_BookMansProfession_BookMans">
+      <End Role="BookMans" EntitySet="BookMans" />
+      <End Role="BookMansProfession" EntitySet="BookMansProfession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookMansProfession_ProfessionType" Association="Self.FK_BookMansProfession_ProfessionType">
+      <End Role="ProfessionType" EntitySet="ProfessionType" />
+      <End Role="BookMansProfession" EntitySet="BookMansProfession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookTage_Book" Association="Self.FK_BookTage_Book">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="BookTag" EntitySet="BookTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookTage_Tag" Association="Self.FK_BookTage_Tag">
+      <End Role="Tag" EntitySet="Tag" />
+      <End Role="BookTag" EntitySet="BookTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookType_Book" Association="Self.FK_BookType_Book">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="BookType" EntitySet="BookType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookType_Type" Association="Self.FK_BookType_Type">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="BookType" EntitySet="BookType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_MemberType" Association="Self.FK_Member_MemberType">
+      <End Role="MemberType" EntitySet="MemberType" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_Person" Association="Self.FK_Member_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Address" Association="Self.FK_Person_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Domain" Association="Self.FK_Person_Domain">
+      <End Role="Domain" EntitySet="Domain" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Image" Association="Self.FK_Person_Image">
+      <End Role="Image" EntitySet="Image" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_User" Association="Self.FK_Person_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSearchTag_Member" Association="Self.FK_PersonSearchTag_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="PersonSearchTag" EntitySet="PersonSearchTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSearchTag_Tag" Association="Self.FK_PersonSearchTag_Tag">
+      <End Role="Tag" EntitySet="Tag" />
+      <End Role="PersonSearchTag" EntitySet="PersonSearchTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_Person" Association="Self.FK_Phone_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Phone" EntitySet="Phone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_PhoneType" Association="Self.FK_Phone_PhoneType">
+      <End Role="PhoneType" EntitySet="PhoneType" />
+      <End Role="Phone" EntitySet="Phone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User1" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

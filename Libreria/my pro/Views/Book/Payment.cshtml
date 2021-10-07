@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "بوکنت|سبد خرید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+        <!--Main container-->
+        <div class="container">
+
+            @{ Html.RenderPartial("_Factor");}
+
+        </div>
+        <!--/Main container-->
+
+
+
+
+@section appJS
+{
+    <script>
+        $(document).ready(function () {
+            $('.mdb-select').material_select();
+
+            $('#gotoregister').click(function () {
+                $('#modal-login').modal('hide');
+                $('#modal-register').modal('show');
+            });
+
+            $('#gotologin').click(function () {
+                $('#modal-register').modal('hide');
+                $('#modal-login').modal('show');
+            });
+        });
+    </script>
+}
